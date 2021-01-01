@@ -1,0 +1,13 @@
+
+
+Concesionario
+
+Vehiculo
+
+id del coche
+
+
+Tabla Caracteristicas
+ 
+atributo clave num serie
+
