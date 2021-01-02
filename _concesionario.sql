@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `idDisenio` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `idGarantia` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `idColor` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date,
   `precioFinal` int(11) NOT NULL,
   PRIMARY KEY (`idFactura`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
@@ -138,8 +139,8 @@ CREATE TABLE IF NOT EXISTS `factura` (
 -- Dumping data for table `factura`
 --
 
-INSERT INTO `factura` (`idFactura`, `idUsuario`, `idCoche`, `idMotor`, `idDisenio`, `idGarantia`, `idColor`, `precioFinal`) VALUES
-(1, '1', '2', '2', '2', '1', '4', 32000);
+INSERT INTO `factura` (`idFactura`, `idUsuario`, `idCoche`, `idMotor`, `idDisenio`, `idGarantia`, `idColor`, `fecha`, `precioFinal`) VALUES
+(1, '1', '2', '2', '2', '1', '4', '2021-01-02', 32000);
 
 -- --------------------------------------------------------
 
