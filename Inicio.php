@@ -6,6 +6,23 @@
 //enlace Crear coche
 
 
-//Admins
+//SI SON ADMINISTRADORES:
 //ver facturas
 //editar coche, motor, garantia, disenio...
+
+?>
+<html>
+
+<a href="SesionInicioMostrarFormulario.php">Iniciar sesión</a>
+<a href="CrearUsuario.php">Registro</a>
+
+
+
+<table border="1">
+
+
+</table>
+
+<a href="CocheListado.php">Configura tu propio coche</a>
+
+</html>

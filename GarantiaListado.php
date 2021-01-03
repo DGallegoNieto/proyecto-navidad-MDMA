@@ -39,11 +39,11 @@ $rs = $select->fetchAll();
     <?php } ?>
 
 </table>
-
-<br />
 <br />
 
-<a href='GarantiaListado.php'>Listado de Garantías</a>
+<a href='MotorListado.php'>Atrás</a>
+<br />
+<a href='FacturaListado.php'>Finalizar compra</a>
 
 </body>
 
