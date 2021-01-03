@@ -33,6 +33,31 @@ function syso(string $contenido)
 {
     file_put_contents('php://stderr', $contenido . "\n");
 }
+// funciones para crear un usuario y comprobar si existe el usuario que se va a crear (Alex)
+function comprobarUsuario(string $usuario): bool
+{
+    $conexionBD= obtenerPdoConexionBD();
+    $sql = 'SELECT * FROM Usuario WHERE identificador=? ';
+    $consulta = $conexionBD->prepare($sql);
+    $consulta->execute([$usuario]);
+    $rs = $consulta->fetchAll();
+    if($consulta->rowCount()==1){
+         return true;
+    }
+    else{
+        return false;
+    }
 
+}
+function crearUsuario(string $usuario,string $contrasenna,string $nombre,string $apellido)
+{
+    $conexionBD= obtenerPdoConexionBD();
+    $sql = 'INSERT INTO `Usuario` (`tipo`,`nombre`,`apellido`,`usuario`, `contrasenna`) VALUES
+( usuario,?,?,?,?)';
+    $consulta = $conexionBD->prepare($sql);
+    $consulta->execute([$usuario,$contrasenna,$nombre,$apellido]);
+    $rs = $consulta->fetchAll();
+
+}
 
 ?>
