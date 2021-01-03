@@ -164,7 +164,9 @@ CREATE TABLE `motor` (
 
 INSERT INTO `motor` (`idMotor`, `potencia`, `combustible`, `cilindrada`, `consumo`, `co2`, `cajaCambio`, `precio`) VALUES
 (1, '150', 'Gasolina', '1500', '5.8', '132', 'Automático', 5000),
-(2, '150', 'Diesel', '2000', '4.5', '138', 'Manual', 4500);
+(2, '150', 'Diesel', '2000', '4.5', '138', 'Manual', 4500),
+(3, '170', 'Diesel', '2500', '4.9', '153', 'Automatico', 5200),
+(4, '190', 'Gasolina', '3000', '5.4', '172', 'Automatico', 5800);
 
 -- --------------------------------------------------------
 
