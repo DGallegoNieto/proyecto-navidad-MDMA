@@ -20,13 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `concesionario`
 --
-
+CREATE DATABASE IF NOT EXISTS `concesionario` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `concesionario`;
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `coche`
 --
-
+DROP TABLE IF EXISTS `coche`;
 CREATE TABLE `coche` (
   `idCoche` int(11) NOT NULL,
   `marca` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -52,7 +53,7 @@ INSERT INTO `coche` (`idCoche`, `marca`, `modelo`, `tipo`, `precio`) VALUES
 --
 -- Estructura de tabla para la tabla `color`
 --
-
+DROP TABLE IF EXISTS `color`;
 CREATE TABLE `color` (
   `idColor` int(11) NOT NULL,
   `color` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -75,7 +76,7 @@ INSERT INTO `color` (`idColor`, `color`, `hexadecimal`) VALUES
 --
 -- Estructura de tabla para la tabla `disenio`
 --
-
+DROP TABLE IF EXISTS `disenio`;
 CREATE TABLE `disenio` (
   `idDisenio` int(11) NOT NULL,
   `acabado` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -99,7 +100,7 @@ INSERT INTO `disenio` (`idDisenio`, `acabado`, `llantas`, `asientos`, `parrilla`
 --
 -- Estructura de tabla para la tabla `factura`
 --
-
+DROP TABLE IF EXISTS `factura`;
 CREATE TABLE `factura` (
   `idFactura` int(11) NOT NULL,
   `idUsuario` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -124,7 +125,7 @@ INSERT INTO `factura` (`idFactura`, `idUsuario`, `idCoche`, `idMotor`, `idDiseni
 --
 -- Estructura de tabla para la tabla `garantia`
 --
-
+DROP TABLE IF EXISTS `garantia`;
 CREATE TABLE `garantia` (
   `idGarantia` int(11) NOT NULL,
   `anios` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -145,7 +146,7 @@ INSERT INTO `garantia` (`idGarantia`, `anios`, `kilometraje`, `precio`) VALUES
 --
 -- Estructura de tabla para la tabla `motor`
 --
-
+DROP TABLE IF EXISTS `motor`;
 CREATE TABLE `motor` (
   `idMotor` int(11) NOT NULL,
   `potencia` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -170,7 +171,7 @@ INSERT INTO `motor` (`idMotor`, `potencia`, `combustible`, `cilindrada`, `consum
 --
 -- Estructura de tabla para la tabla `usuario`
 --
-
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `tipo` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
