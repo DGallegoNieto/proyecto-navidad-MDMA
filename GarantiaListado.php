@@ -1,9 +1,9 @@
 <?php
-require_once "varios.php";
+require_once "_varios.php";
 
 $conexionBD = obtenerPdoConexionBD();
 
-$sql = "SELECT idGarantia, anios, kilometraje, precio FROM gatantia";
+$sql = "SELECT idGarantia, anios, kilometraje, precio FROM garantia";
 
 $select = $conexionBD->prepare($sql);
 $select->execute([]);
