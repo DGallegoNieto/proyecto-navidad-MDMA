@@ -8,6 +8,10 @@ $select = $pdo->prepare($sql);
 $select->execute([]);
 $rs = $select->fetchAll();
 
+$sqlColor = "SELECT * FROM color ORDER BY idColor";
+$selectColor = $pdo->prepare($sqlColor);
+$selectColor->execute([]);
+$rsColor = $selectColor->fetchAll();
 
 ?>
 <html>
@@ -20,31 +24,50 @@ $rs = $select->fetchAll();
 <table border="1">
 
     <tr>
-        <th>Id</th>
         <th>Acabado</th>
         <th>Llantas</th>
         <th>Asientos</th>
         <th>Parrilla</th>
         <th>Precio</th>
+        
     </tr>
     <?php
     foreach ($rs as $fila) { ?>
         <tr>
-            <td> <p><?=$fila["idDisenio"] ?></p></td>
-            <td> <p><?=$fila["acabado"] ?></p></td>
-            <td> <p><?=$fila["llantas"] ?></p></td>
-            <td> <p><?=$fila["asientos"] ?></p></td>
-            <td> <p><?=$fila["parrilla"] ?></p></td>
-            <td> <p><?=$fila["precio"] ?>€</p></td>
-            <td><input type="radio" name="disenio" </td>
+            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["llantas"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
+            <td><input type="radio" name="disenio" value='<?$fila["idDisenio"]?>' </td>
         </tr>
     <?php } ?>
 
 </table>
+
+<h2>Colores disponibles</h2>
+<table border="1" >
+
+    <tr>
+        <th colspan="3">Color</th>
+    </tr>
+    <?php
+    foreach ($rsColor as $filaColor) { ?>
+        <tr>
+
+            <td><p> <?= $filaColor["color"] ?> </p></td>
+            <td style="background-color:<?=$filaColor["hexadecimal"]?>; width: 15px; height: 10px;"></td>
+            <td><input type="radio" name="color" value='<?$filaColor["idColor"]?>' </td>
+        </tr>
+    <?php } ?>
+
+</table>
+
+
 <br/>
-<a href="">Atrás</a>
+<a href="CocheListado.php">Atrás</a>
 <br/>
-<a href="">Siguiente</a>
+<a href="MotorListado.php">Siguiente</a>
 
 </body>
 

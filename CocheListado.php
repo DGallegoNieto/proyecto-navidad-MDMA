@@ -20,7 +20,6 @@ $rs = $select->fetchAll();
 <table border="1">
 
     <tr>
-        <th>Id</th> <!--Numero de serie?-->
         <th>Marca</th>
         <th>Modelo</th>
         <th>Tipo</th>
@@ -29,20 +28,19 @@ $rs = $select->fetchAll();
     <?php
     foreach ($rs as $fila) { ?>
         <tr>
-            <td> <p><?=$fila["idCoche"] ?></p></td>
-            <td> <p><?=$fila["marca"] ?></p></td>
-            <td> <p><?=$fila["modelo"] ?></p></td>
-            <td> <p><?=$fila["tipo"] ?></p></td>
-            <td> <p><?=$fila["precio"] ?>€</p></td>
-            <td><input type="radio" name="coche" </td>
+            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
+            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
+            <td><input type="radio" name="coche" value='<?$fila["idCoche"]?>'</td>
         </tr>
     <?php } ?>
 
 </table>
 <br/>
-<a href="">Volver al inicio</a>
+<a href="Inicio.php">Volver al inicio</a>
 <br/>
-<a href="">Siguiente</a>
+<a href="DisenioListado.php">Siguiente</a>
 
 </body>
 

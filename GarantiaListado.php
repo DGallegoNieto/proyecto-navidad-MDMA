@@ -31,9 +31,10 @@ $rs = $select->fetchAll();
 
     <?php foreach ($rs as $fila) { ?>
         <tr align="center">
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["anios"] ?> </a></td>
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["kilometraje"] ?> </a></td>
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["precio"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?id=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?id=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?id=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> </a></td>
+            <td><input type="radio" name="garantia" value='<?$fila["idGarantia"]?>'</td>
         </tr>
     <?php } ?>
 

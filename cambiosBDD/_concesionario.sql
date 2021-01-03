@@ -27,6 +27,7 @@ USE `concesionario`;
 --
 -- Estructura de tabla para la tabla `coche`
 --
+
 DROP TABLE IF EXISTS `coche`;
 CREATE TABLE `coche` (
   `idCoche` int(11) NOT NULL,
@@ -53,6 +54,7 @@ INSERT INTO `coche` (`idCoche`, `marca`, `modelo`, `tipo`, `precio`) VALUES
 --
 -- Estructura de tabla para la tabla `color`
 --
+
 DROP TABLE IF EXISTS `color`;
 CREATE TABLE `color` (
   `idColor` int(11) NOT NULL,
