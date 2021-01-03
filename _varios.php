@@ -37,7 +37,7 @@ function syso(string $contenido)
 function comprobarUsuario(string $usuario): bool
 {
     $conexionBD= obtenerPdoConexionBD();
-    $sql = 'SELECT * FROM Usuario WHERE identificador=? ';
+    $sql = 'SELECT * FROM Usuario WHERE idUsuario=? ';
     $consulta = $conexionBD->prepare($sql);
     $consulta->execute([$usuario]);
     $rs = $consulta->fetchAll();
@@ -53,9 +53,9 @@ function crearUsuario(string $usuario,string $contrasenna,string $nombre,string 
 {
     $conexionBD= obtenerPdoConexionBD();
     $sql = 'INSERT INTO `Usuario` (`tipo`,`nombre`,`apellido`,`usuario`, `contrasenna`) VALUES
-( usuario,?,?,?,?)';
+( ?,?,?,?,?)';
     $consulta = $conexionBD->prepare($sql);
-    $consulta->execute([$usuario,$contrasenna,$nombre,$apellido]);
+    $consulta->execute(['Cliente',$usuario,$contrasenna,$nombre,$apellido]);
     $rs = $consulta->fetchAll();
 
 }

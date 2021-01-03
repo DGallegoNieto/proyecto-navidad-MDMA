@@ -37,16 +37,16 @@ require_once"_Varios.php";
 
 <?php
 	
+//*TODO poner un minimo de longitud en todos los campos*
+if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])&& isset($_REQUEST["nombre"]) && isset($_REQUEST["apellido"])) {
 
-if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])) {
+	$contrasenia = trim($_REQUEST["contrasenia"]);
+	$contraseniaC = trim($_REQUEST["contraseniaC"]);
+	$usuario = trim($_REQUEST["usuario"]);
+	$nombre = trim($_REQUEST["nombre"]);
+	$apellido = trim($_REQUEST["apellido"]);
 
-	$contrasenia = $_REQUEST["contrasenia"];
-	$contraseniaC = $_REQUEST["contraseniaC"];
-	$usuario = $_REQUEST["usuario"];
-	$nombre = $_REQUEST["nombre"];
-	$apellido = $_REQUEST["apellido"];
-
-	//echo "hola".$contrasenia;
+	
 
 	if($contrasenia != $contraseniaC || $contrasenia==" " || $contraseniaC==""){
 		echo "Las contraseñas no coinciden";
@@ -58,7 +58,7 @@ if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])) {
 }
 	else 
 	//metodo que crea el usuario
-	
+	echo "che pelotudo funcionó";
 	crearUsuario($usuario,$contrasenia,$nombre,$apellido);
 
 	redireccionar("SesionInicioMostrarFormulario.php");
