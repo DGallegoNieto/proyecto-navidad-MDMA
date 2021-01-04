@@ -41,7 +41,14 @@ $rs = $select->fetchAll();
 <a href="Inicio.php">Volver al inicio</a>
 <br/>
 <a href="DisenioListado.php">Siguiente</a>
+<br/>
+<?php
+if(isset($_SESSION["admin"])){
+    echo"<p>Sesión iniciada</p>";
+    echo"<a href='SesionCerrar.php'>Cerrar sesión</a>";
+}
 
+?>
 </body>
 
 </html>

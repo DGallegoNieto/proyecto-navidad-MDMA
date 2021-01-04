@@ -9,3 +9,8 @@
 //Admins
 //ver facturas
 //editar coche, motor, garantia, disenio...
+?>
+<html>
+
+<a href="SesionInicioMostrarFormulario.php">Iniciar sesión</a>
+</html>

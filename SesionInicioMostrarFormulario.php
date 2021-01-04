@@ -21,7 +21,7 @@
 	<label>Usuario</label>
 	<input type="text" name="usuario">
 	<label>Contraseña</label>
-	<input type="text" name="contrasenia">
+	<input type="text" name="contrasenna">
 	<input type="submit" value="enviar">
 </form>
 <br>

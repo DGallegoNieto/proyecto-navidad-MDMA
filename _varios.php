@@ -80,12 +80,12 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
 
 
 
-	function marcarSesionComoIniciada(array $arrayUsuario,bool $admin)
+	function marcarSesionComoIniciada(array $arrayUsuario, bool $admin)
 {
 	$_SESSION["id"]= $arrayUsuario['id'];
 	$_SESSION["usuario"]= $arrayUsuario['usuario'];
-	if(isset($admin)){
-		$_SESSION["admin"]=$admin;
+	if($admin == true){
+		$_SESSION["admin"] = $admin;
 	}
 	
 }
@@ -98,4 +98,10 @@ function comprobarAdmin(array $arrayUsuario): bool
     }
 }
 
+function cerrarSesion()
+{
+    session_destroy();
+    session_unset();
 
+
+}

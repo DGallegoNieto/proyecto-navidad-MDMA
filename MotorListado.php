@@ -36,8 +36,8 @@
 
 	<?php foreach ($rs as $fila) { ?>
         <tr>
-            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?> <?=$fila["combustible"] ?> <?=$fila["cilindrada"] ?> <?=$fila["consumo"] ?> <?=$fila["co2"] ?><?=$fila["cajaCambio"] ?> <?=$fila["precio"] ?></a></td>   
-            <td><a href='MotorEliminar.php?id=<?=$fila["idMotor"]?>'> (X)                   </a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?> <?=$fila["combustible"] ?> <?=$fila["cilindrada"] ?> <?=$fila["consumo"] ?> <?=$fila["co2"] ?><?=$fila["cajaCambio"] ?> <?=$fila["precio"] ?></a></td>
+            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>' </td>
         </tr>
 	<?php } ?>
 
@@ -49,7 +49,8 @@
 
 <br />
 <br />
-<a href='DisenioListado.php'>Volver</a>   
+<a href='DisenioListado.php'>Volver</a>
+<br />
 <a href='GarantiaListado.php'>Siguiente</a>
 
 </body>
