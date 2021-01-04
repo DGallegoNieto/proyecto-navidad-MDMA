@@ -6,11 +6,13 @@ require_once"_Varios.php";
 
 
 $usuario = $_REQUEST['usuario'];
-$contrasenia = $_REQUEST['contrasenia'];
+$contrasenna = $_REQUEST['contrasenna'];
 
 
-$arrayUsuario = obtenerUsuario($usuario, $contrasenia);
-
+$arrayUsuario = obtenerUsuario($usuario, $contrasenna);
+if(comprobarAdmin($arrayUsuario)){
+	$admin = true;
+}
 
 
 
