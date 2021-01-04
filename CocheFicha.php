@@ -58,11 +58,15 @@ if($nuevaEntrada){
 
     </ul>
     <br/>
-    <?php if ($nuevaEntrada) { ?>
+    <?php if(isset($_SESSION["admin"])){
+
+
+    if ($nuevaEntrada) { ?>
         <input type='submit' name='crear' value='Crear nuevo coche' />
     <?php } else { ?>
         <input type='submit' name='guardar' value='Guardar cambios' />
-    <?php } ?>
+    <?php }
+    }?>
     <br/>
     <a href="CocheEliminar.php?id=<?=$_SESSION["cocheId"]?>">Eliminar</a>
 </form>

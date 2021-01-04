@@ -61,30 +61,27 @@ function crearUsuario(string $usuario,string $contrasenna,string $nombre,string 
 }
 
 
-function obtenerUsuario(string $usuario, string $contrasenia): ?array
+function obtenerUsuario(string $usuario, string $contrasenna): ?array
 {
-	$conexionBD= obtenerPdoConexionBD();
-	
-	$sql = 'SELECT * FROM usuario WHERE usuario =? AND contrasenia =?';
-	$consulta = $conexionBD->prepare($sql);
-	
-	$consulta->execute([$usuario, $contrasenia]);
-	$rs = $consulta->fetchAll();
+    $conexionBD = obtenerPdoConexionBD();
 
-	if($consulta->rowCount()==1){
-		 return $user = array('idUsuario'=> $rs[0]['idUsuario'],'tipo'=> $rs[0]['tipo'],'nombre'=> $rs[0]['nombre'],'apellido' => $rs[0]['apellido'], 'usuario' => $rs[0]['usuario'],'contrasenia' => $rs[0]['contrasenia']);
-	}
+    $sql = 'SELECT * FROM usuario WHERE usuario =? AND contrasenna =?';
+    $consulta = $conexionBD->prepare($sql);
 
-	else{
-		return null;
-	}
+    $consulta->execute([$usuario, $contrasenna]);
+    $rs = $consulta->fetchAll();
+
+    if ($consulta->rowCount() == 1) {
+        return ['idUsuario' => $rs[0]['idUsuario'], 'tipo' => $rs[0]['tipo'], 'nombre' => $rs[0]['nombre'], 'apellido' => $rs[0]['apellido'], 'usuario' => $rs[0]['usuario'], 'contrasenna' => $rs[0]['contrasenna']];
+    } else {
+        return null;
+    }
+}
 
 
 
 	function marcarSesionComoIniciada(array $arrayUsuario,bool $admin)
-{	
-	
-	
+{
 	$_SESSION["id"]= $arrayUsuario['id'];
 	$_SESSION["usuario"]= $arrayUsuario['usuario'];
 	if(isset($admin)){
@@ -94,12 +91,11 @@ function obtenerUsuario(string $usuario, string $contrasenia): ?array
 }
 function comprobarAdmin(array $arrayUsuario): bool
 {
-	if($arrayUsuario['tipo']=="admin"){
-		return true;
-	}
-	else{
-		return false;
-	}
+    if ($arrayUsuario['tipo'] == "admin") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-?>
+
