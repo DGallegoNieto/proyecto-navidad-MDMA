@@ -66,13 +66,6 @@ if ($nuevaEntrada) {
 
 </form>
 
-<br />
-<a href='equipoListado.php'>Volver al listado de equipos.</a>
-<br />
-<br />
-
-<a href='jugadoresEquipoListado.php?id=<?=$id?>'>Ver jugadores del equipo.</a>
-
 </body>
 
 </html>
