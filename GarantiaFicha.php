@@ -1,6 +1,5 @@
 <?php
-<<<<<<< HEAD
-=======
+
 require_once "_varios.php";
 
 $conexion = obtenerPdoConexionBD();
@@ -71,4 +70,4 @@ if ($nuevaEntrada) {
 </body>
 
 </html>
->>>>>>> main
+
