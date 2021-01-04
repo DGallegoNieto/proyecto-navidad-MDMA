@@ -40,7 +40,16 @@ $rs = $select->fetchAll();
 
 </table>
 <br/>
+<<<<<<< Updated upstream
 <a href="">Volver al inicio</a>
+=======
+<?php
+//IF ADMIN = TRUE
+?>
+<a href="CocheFicha.php?id=-1">Nueva entrada</a>
+<br />
+<a href="Inicio.php">Volver al inicio</a>
+>>>>>>> Stashed changes
 <br/>
 <a href="">Siguiente</a>
 
