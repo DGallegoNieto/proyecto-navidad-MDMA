@@ -4,7 +4,7 @@ require_once "_varios.php";
 
 $pdo = obtenerPdoConexionBD();
 
-$_SESSION["cocheId"] = (int)$_REQUEST["id"];
+$_SESSION["cocheId"] = (int)$_REQUEST["cocheId"];
 
 $nuevaEntrada = ($_SESSION["cocheId"] == -1);
 
@@ -53,23 +53,19 @@ if($nuevaEntrada){
         </li>
         <li>
             <strong>Precio: </strong>
-            <input type="text" name="marca" value="<?=$precioCoche?>">
+            <input type="text" name="precio" value="<?=$precioCoche?>">
         </li>
 
     </ul>
-    <br/>
-    <?php if(isset($_SESSION["admin"])){
-
-
-    if ($nuevaEntrada) { ?>
-        <input type='submit' name='crear' value='Crear nuevo coche' />
-    <?php } else { ?>
-        <input type='submit' name='guardar' value='Guardar cambios' />
-    <?php }
-    }?>
-    <br/>
-    <a href="CocheEliminar.php?id=<?=$_SESSION["cocheId"]?>">Eliminar</a>
+    <?php if($nuevaEntrada){ ?>
+        <input type="submit" value="Crear coche" name="crear">
+    <?php } else {?>
+        <input type="submit" value="Guardar cambios" name="guardar">
+    <?php } ?>
 </form>
+
+<a href="CocheEliminar.php?id=<?=$_SESSION["cocheId"]?>">Eliminar</a>
+<br />
 <a href="CocheListado.php">Volver</a>
 
 </html>

@@ -4,11 +4,11 @@ require_once "_varios.php";
 $conexion = obtenerPdoConexionBD();
 
 
-$sql = "DELETE FROM coche WHERE idCoche=?";
+$sql = "DELETE FROM disenio WHERE idDisenio=?";
 
 $sentencia = $conexion->prepare($sql);
 
-$sqlConExito = $sentencia->execute([$_SESSION["cocheId"]]); //.
+$sqlConExito = $sentencia->execute([$_SESSION["disenioId"]]); //.
 
 
 $unaFilaAfectada = ($sentencia->rowCount() == 1);
@@ -31,21 +31,21 @@ $noExistia = ($sqlConExito && $ningunaFilaAfectada);
 <?php if ($correcto) { ?>
 
     <h1>Eliminación completada</h1>
-    <p>Se ha eliminado correctamente el coche de la base de datos.</p>
+    <p>Se ha eliminado correctamente el diseño de la base de datos.</p>
 
 <?php } else if ($noExistia) { ?>
 
     <h1>Eliminación imposible</h1>
-    <p>No existe el coche que se pretende eliminar.</p>
+    <p>No existe el diseño que se pretende eliminar.</p>
 
 <?php } else { ?>
 
     <h1>Error en la eliminación</h1>
-    <p>No se ha podido eliminar el coche o no existía.</p>
+    <p>No se ha podido eliminar el diseño o no existía.</p>
 
 <?php } ?>
 
-<a href='CocheListado.php'>Volver al listado de coches.</a>
+<a href='DisenioListado.php'>Volver al listado de diseños.</a>
 
 </body>
 

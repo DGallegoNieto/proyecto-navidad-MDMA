@@ -28,27 +28,23 @@ $rs = $select->fetchAll();
     <?php
     foreach ($rs as $fila) { ?>
         <tr>
-            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
-            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
-            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
-            <td> <a href='CocheFicha.php?id=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
             <td><input type="radio" name="coche" value='<?$fila["idCoche"]?>'</td>
         </tr>
     <?php } ?>
 
 </table>
 <br/>
+<a href="CocheFicha.php?cocheId=-1">Nueva entrada</a>
+<br/>
 <a href="Inicio.php">Volver al inicio</a>
 <br/>
 <a href="DisenioListado.php">Siguiente</a>
 <br/>
-<?php
-if(isset($_SESSION["admin"])){
-    echo"<p>Sesión iniciada</p>";
-    echo"<a href='SesionCerrar.php'>Cerrar sesión</a>";
-}
 
-?>
 </body>
 
 </html>

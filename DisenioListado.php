@@ -34,16 +34,19 @@ $rsColor = $selectColor->fetchAll();
     <?php
     foreach ($rs as $fila) { ?>
         <tr>
-            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
-            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["llantas"] ?> </a></td>
-            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
-            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
-            <td> <a href='DisenioFicha.php?id=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["llantas"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
             <td><input type="radio" name="disenio" value='<?$fila["idDisenio"]?>' </td>
         </tr>
     <?php } ?>
 
 </table>
+
+<br />
+<a href="DisenioFicha.php?disenioId=-1">Nueva entrada</a>
 
 <h2>Colores disponibles</h2>
 <table border="1" >

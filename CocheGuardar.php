@@ -17,13 +17,13 @@ $nueva_entrada = ($_SESSION["cocheId"] == -1);
 
 if ($nueva_entrada) {
 
-    $sql = "INSERT INTO persona (nombre, apellidos, telefono, categoriaId) VALUES (?, ?, ?, ?)";
-    $parametros = [$nombre, $apellidos, $telefono, $categoriaId];
+    $sql = "INSERT INTO coche (marca, modelo, tipo, precio) VALUES (?, ?, ?, ?)";
+    $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche];
 
 } else {
 
-    $sql = "UPDATE persona SET nombre=?, apellidos=?, telefono=?, categoriaId=? WHERE id=?";
-    $parametros = [$nombre, $apellidos, $telefono, $categoriaId, $id];
+    $sql = "UPDATE coche SET marca=?, modelo=?, tipo=?, precio=? WHERE idCoche=?";
+    $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche, $_SESSION["cocheId"]];
 }
 
 $sentencia = $pdo->prepare($sql);
@@ -52,34 +52,29 @@ $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
 <body>
 
 <?php
-// Todo bien tanto si se han guardado los datos nuevos como si no se habían modificado.
+
 if ($correcto || $datos_no_modificados) { ?>
 
-    <?php if ($id == -1) { ?>
+    <?php if ($nueva_entrada) { ?>
         <h1>Inserción completada</h1>
-        <p>Se ha insertado correctamente la nueva entrada de <?php echo $nombre; ?>.</p>
+        <p>Se han añadido correctamente los datos del coche a la base de datos.</p>
     <?php } else { ?>
         <h1>Guardado completado</h1>
-        <p>Se han guardado correctamente los datos de <?php echo $nombre; ?>.</p>
-
-        <?php if ($datos_no_modificados) { ?>
-            <p>En realidad, no había modificado nada, pero no está de más que se haya asegurado pulsando el botón de guardar :)</p>
-        <?php } ?>
-    <?php }
-    ?>
+        <p>Se han guardado correctamente los datos del coche.</p>
+    <?php } ?>
 
     <?php
 } else {
     ?>
 
     <h1>Error en la modificación.</h1>
-    <p>No se han podido guardar los datos de el contacto.</p>
+    <p>No se han podido guardar los datos del coche.</p>
 
     <?php
 }
 ?>
 
-<a href="persona-listado.php">Volver al listado de personas.</a>
+<a href="CocheListado.php">Volver al listado de coches.</a>
 
 </body>
 
