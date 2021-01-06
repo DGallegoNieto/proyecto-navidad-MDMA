@@ -32,8 +32,8 @@ $rs = $select->fetchAll();
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
-            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
-            <td><input type="radio" name="coche" value='<?=$fila["idCoche"]?>'</td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></td>
+            <td><input type="radio" name="coche" value='<?=$fila["idCoche"]?>'></td>
         </tr>
     <?php } ?>
 
