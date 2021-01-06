@@ -12,6 +12,9 @@
     $select->execute([]);
     $rs = $select->fetchAll();
 
+    $_SESSION["facturaDisenio"] = $_REQUEST["disenio"];
+    $_SESSION["facturaColor"] = $_REQUEST["color"];
+
 ?>
 
 
@@ -28,6 +31,7 @@
 
 <h1>Motores</h1>
 
+<form method="get" action="GarantiaListado.php">
 <table border='1'>
 
 	<tr>
@@ -43,15 +47,17 @@
 
 </table>
 
+
 <br />
 
 <a href='MotorGuardar.php?id=-1'>Crear nuevo Motor</a>
 
 <br />
 <br />
-<a href='DisenioListado.php'>Volver</a>
+<input type="submit" value="Siguiente">
 <br />
-<a href='GarantiaListado.php'>Siguiente</a>
+<a href='DisenioListado.php'>Volver</a>
+</form>
 
 </body>
 

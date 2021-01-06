@@ -13,6 +13,8 @@ $selectColor = $pdo->prepare($sqlColor);
 $selectColor->execute([]);
 $rsColor = $selectColor->fetchAll();
 
+$_SESSION["facturaCoche"] = $_REQUEST["coche"];
+
 ?>
 <html>
 <head>
@@ -21,6 +23,7 @@ $rsColor = $selectColor->fetchAll();
 <body>
 <h1>Listado de diseños</h1>
 
+<form method="get" action="MotorListado.php">
 <table border="1">
 
     <tr>
@@ -39,11 +42,12 @@ $rsColor = $selectColor->fetchAll();
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
-            <td><input type="radio" name="disenio" value='<?$fila["idDisenio"]?>' </td>
+            <td><input type="radio" name="disenio" value='<?=$fila["idDisenio"]?>' </td>
         </tr>
     <?php } ?>
 
 </table>
+
 
 <br />
 <a href="DisenioFicha.php?disenioId=-1">Nueva entrada</a>
@@ -60,17 +64,19 @@ $rsColor = $selectColor->fetchAll();
 
             <td><p> <?= $filaColor["color"] ?> </p></td>
             <td style="background-color:<?=$filaColor["hexadecimal"]?>; width: 15px; height: 10px;"></td>
-            <td><input type="radio" name="color" value='<?$filaColor["idColor"]?>' </td>
+            <td><input type="radio" name="color" value='<?=$filaColor["idColor"]?>' </td>
         </tr>
     <?php } ?>
 
 </table>
-
+    <br />
+    <input type="submit" value="Siguiente">
+</form>
 
 <br/>
 <a href="CocheListado.php">Atrás</a>
 <br/>
-<a href="MotorListado.php">Siguiente</a>
+
 
 </body>
 

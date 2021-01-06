@@ -8,6 +8,8 @@ $select = $pdo->prepare($sql);
 $select->execute([]);
 $rs = $select->fetchAll();
 
+$_SESSION["facturaMotor"] = $_REQUEST["motor"];
+
 ?>
 
 <html>
@@ -20,6 +22,7 @@ $rs = $select->fetchAll();
 
 <h1>Listado de Garantías</h1>
 
+<form action="FacturaListado.php" method="get">
 <table border='1'>
 
     <tr>
@@ -33,7 +36,7 @@ $rs = $select->fetchAll();
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
-            <td><input type="radio" name="garantia" value='<?$fila["idGarantia"]?>'</td>
+            <td><input type="radio" name="garantia" value='<?=$fila["idGarantia"]?>'</td>
         </tr>
     <?php } ?>
 
@@ -43,9 +46,9 @@ $rs = $select->fetchAll();
 <br/><br/>
 <a href="Inicio.php">Volver al inicio</a>
 <br/><br/>
-<a href="FacturaListado.php">Siguiente</a>
+<input type="submit" value="Siguiente">
 <br/>
-
+</form>
 </body>
 
 </html>
