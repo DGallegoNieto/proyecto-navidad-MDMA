@@ -50,7 +50,13 @@ $_SESSION["facturaCoche"] = $_REQUEST["coche"];
 
 
 <br />
-<a href="DisenioFicha.php?disenioId=-1">Nueva entrada</a>
+<?php
+if(isset($_SESSION["admin"])){
+    ?>
+   
+    <a href="DisenioFicha.php?disenioId=-1">Nueva entrada</a> 
+<?php } ?>
+
 
 <h2>Colores disponibles</h2>
 <table border="1" >
