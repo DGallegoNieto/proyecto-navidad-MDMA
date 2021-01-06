@@ -1,11 +1,10 @@
 <?php
-require_once "varios.php";
+require_once "_varios.php";
 
-$conexionBD = obtenerPdoConexionBD();
+$pdo = obtenerPdoConexionBD();
 
-$sql = "SELECT idGarantia, anios, kilometraje, precio FROM gatantia";
-
-$select = $conexionBD->prepare($sql);
+$sql = "SELECT * FROM garantia ORDER BY idGarantia";
+$select = $pdo->prepare($sql);
 $select->execute([]);
 $rs = $select->fetchAll();
 
@@ -21,9 +20,9 @@ $rs = $select->fetchAll();
 
 <h1>Listado de Garantías</h1>
 
-<table border='1' bgcolor='#d3d3d3' bordercolor='black'>
+<table border='1'>
 
-    <tr bgcolor='#a9a9a9' align='center'>
+    <tr>
         <th>Años</th>
         <th>Kilometraje</th>
         <th>Precio</th>
@@ -31,18 +30,21 @@ $rs = $select->fetchAll();
 
     <?php foreach ($rs as $fila) { ?>
         <tr align="center">
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["anios"] ?> </a></td>
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["kilometraje"] ?> </a></td>
-            <td><a href='GarantiaFicha.php?id=<?=$fila["id"]?>'> <?= $fila["precio"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
+            <td><input type="radio" name="garantia" value='<?$fila["idGarantia"]?>'</td>
         </tr>
     <?php } ?>
 
 </table>
-
-<br />
-<br />
-
-<a href='GarantiaListado.php'>Listado de Garantías</a>
+<br/><br/>
+<a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a>
+<br/><br/>
+<a href="Inicio.php">Volver al inicio</a>
+<br/><br/>
+<a href="FacturaListado.php">Siguiente</a>
+<br/>
 
 </body>
 

@@ -2,72 +2,65 @@
 
 require_once "_varios.php";
 
-$conexion = obtenerPdoConexionBD();
+$pdo = obtenerPdoConexionBD();
 
-$id = (int)$_REQUEST["id"];
+$_SESSION["garantiaId"] = (int)$_REQUEST["garantiaId"];
 
-$nuevaEntrada = ($id == -1);
+$nuevaEntrada = ($_SESSION["garantiaId"] == -1);
 
-if ($nuevaEntrada) {
-    $GarantiaAnios = "Años de garantía";
-    $GarantiaKilometraje = "Kilometraje máximo";
-    $GarantiaPrecio = "Precio a pagar";
-} else {
-    $sql = "SELECT * FROM garantia WHERE id=?";
+if($nuevaEntrada){
+    $anios = " ";
+    $kilometraje = " ";
+    $precio = " ";
+}else{
 
-    $select = $conexion->prepare($sql);
-    $select->execute([$id]);
-    $rsGarantia = $select->fetchAll();
+    $sql = "SELECT anios, kilometraje, precio FROM garantia WHERE idGarantia=?";
+    $select = $pdo->prepare($sql);
+    $select->execute([$_SESSION["garantiaId"]]);
+    $rs = $select->fetchAll();
 
-    $GarantiaAnios = $rsGarantia[0]["garantia"];
-    $GarantiaKilometraje = $rsGarantia[0]["kilometraje"];
-    $GarantiaPrecio = $rsGarantia[0]["precio"];
-    $GarantiaId = $rsGarantia[0]["id"];
+    $aniosGarantia = $rs[0]["anios"];
+    $kilometrajeGarantia = $rs[0]["kilometraje"];
+    $precioGarantia = $rs[0]["precio"];
 }
 
 ?>
-
 <html>
 
-<head>
-    <meta charset='UTF-8'>
-</head>
+<h1>Ficha de garantía</h1>
 
-<body>
+<?php
+if($nuevaEntrada){
+    echo "<h3>Introduce los datos de la garantía</h3>";
+}
+?>
 
-<?php if ($nuevaEntrada) { ?>
-    <h1>Nueva garantía</h1>
-<?php } else { ?>
-    <h1>Ficha de garantía</h1>
-<?php } ?>
+<form method="post" action="GarantiaGuardar.php">
+    <ul>
+        <li>
+            <strong>Anios: </strong>
+            <input type="text" name="anios" value="<?=$aniosGarantia?>">
+        </li>
+        <li>
+            <strong>Kilometraje: </strong>
+            <input type="text" name="kilometraje" value="<?=$kilometrajeGarantia?>">
+        </li>
+        <li>
+            <strong>Precio: </strong>
+            <input type="text" name="precio" value="<?=$precioGarantia?>">
+        </li>
 
-<form method='post' action='GarantiaFicha.php'>
-
-    <input type='hidden' name='id' value='<?=$id?>' />
-
-    <label for='nombre'>Años: </label>
-    <input type='text' name='años' value='<?=$GarantiaAnios?>' />
-    <br/>
-    <br/>
-    <label for='localidad'>Kilometraje: </label>
-    <input type='text' name='kilometraje' value='<?=$GarantiaKilometraje?>' />
-    <br/>
-    <br/>
-
-    <label for='anioCreacion'>Precio: </label>
-    <input type='text' name='precio' value='<?=$GarantiaPrecio?>' />
-    <br/>
-    <br/>
-
-    <?php if ($nuevaEntrada) { ?>
-        <input type='submit' name='crear' value='Crear nueva garantía' />
-    <?php } else { ?>
-        <input type='submit' name='guardar' value='Guardar cambios' />
+    </ul>
+    <?php if($nuevaEntrada){ ?>
+        <input type="submit" value="Crear garantia" name="crear">
+    <?php } else {?>
+        <input type="submit" value="Guardar cambios" name="guardar">
     <?php } ?>
-
 </form>
 
-</body>
+<br />
+<a href="GarantiaListado.php">Volver al listado de garantías</a>
+<br /><br />
+<a href="GarantiaEliminar.php?id=<?=$_SESSION["garantiaId"]?>">Eliminar garantía</a>
 
 </html>
-
