@@ -70,6 +70,7 @@ $_SESSION["facturaCoche"] = $_REQUEST["coche"];
 
 </table>
     <br />
+ 
     <input type="submit" value="Siguiente">
 </form>
 
