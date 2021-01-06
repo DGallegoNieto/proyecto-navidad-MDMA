@@ -12,8 +12,8 @@
     $select->execute([]);
     $rs = $select->fetchAll();
 
-    $_SESSION["facturaDisenio"] = $_REQUEST["disenio"];
-    $_SESSION["facturaColor"] = $_REQUEST["color"];
+    $_SESSION["facturaDisenio"] = isset($_REQUEST["disenio"]);
+    $_SESSION["facturaColor"] = isset($_REQUEST["color"]);
 
 ?>
 
@@ -35,13 +35,19 @@
 <table border='1'>
 
 	<tr>
-		<th>Tipos</th>
+		<th>Potencia</th>
+        <th>Combustible</th>
+        <th>Cilindrada</th>
+        <th>Consumo</th>
+        <th>Emisiones</th>
+        <th>Caja de cambios</th>
+        <th>Precio</th>
 	</tr>
 
 	<?php foreach ($rs as $fila) { ?>
         <tr>
-            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?> <?=$fila["combustible"] ?> <?=$fila["cilindrada"] ?> <?=$fila["consumo"] ?> <?=$fila["co2"] ?><?=$fila["cajaCambio"] ?> <?=$fila["precio"] ?></a></td>
-            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>' </td>
+            <th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?></a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["combustible"] ?></a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cilindrada"] ?></a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'>   <?=$fila["consumo"] ?>L /100km</a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["co2"] ?>g co2</a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></th><th><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></th> 
+            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>'> </td>
         </tr>
 	<?php } ?>
 
@@ -50,18 +56,15 @@
 
 <br />
 
-<?php
-if(isset($_SESSION["admin"])){
-    ?>
-    
-    <a href="MotorFicha.php?idMotor=-1">Nueva entrada</a> 
-<?php } ?>
+<a href='MotorFicha.php?idMotor=-1'>Crear nuevo Motor</a>
 
 <br />
 <br />
+<button onclick="location.href='DisenioListado.php'">Volver</button>
 <input type="submit" value="Siguiente">
 <br />
-<a href='DisenioListado.php'>Volver</a>
+    
+    
 </form>
 
 </body>

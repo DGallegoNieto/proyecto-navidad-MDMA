@@ -4,20 +4,20 @@
 	$conexionBD = obtenerPdoConexionBD();
 	$idMotor = (int)$_REQUEST["idMotor"];
 	$potencia = $_REQUEST["potencia"];
-    $combustible =$_REQUEST["combustible"];
-    $cilindrada =$_REQUEST["cilindrada"];
-    $consumo =$_REQUEST["consumo"];
-    $co2 =$_REQUEST["co2"];
-    $cajaCambio =$_REQUEST["cajaCambio"];
-    $precio =$_REQUEST["precio"];
+    $combustible = $_REQUEST["combustible"];
+    $cilindrada = $_REQUEST["cilindrada"];
+    $consumo = $_REQUEST["consumo"];
+    $co2 = $_REQUEST["co2"];
+    $cajaCambio = $_REQUEST["cajaCambio"];
+    $precio = $_REQUEST["precio"];
 
 	$nuevaEntrada = ($idMotor == -1);
 	
 	if ($nuevaEntrada) {
- 		$sql = "INSERT INTO motor VALUES (?,?,?,?,?,?,?)";
+ 		$sql = "INSERT INTO motor (potencia, combustible, cilindrada, consumo, co2, cajaCambio, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
  		$parametros = [$potencia, $combustible, $cilindrada, $consumo, $co2, $cajaCambio, $precio];
 	} else {
- 		$sql = "UPDATE motor SET potencia=?, combustible=?, cilindrada?, consumo=?, co2=?, cajaCambio=?, precio=? WHERE idMotor=?";
+ 		$sql = "UPDATE motor SET potencia=?, combustible =?, cilindrada =?, consumo =?, co2=?, cajaCambio=?,precio=? WHERE idMotor=?";
         $parametros = [$potencia, $combustible, $cilindrada, $consumo, $co2, $cajaCambio, $precio, $idMotor];
  	}
  	
@@ -46,10 +46,8 @@
 	if ($correcto || $datosNoModificados) { ?>
 		<?php if ($nuevaEntrada) { ?>
 			<h1>Inserción completada</h1>
-			<p>Se ha insertado correctamente la nueva entrada de <?=$nombre?>.</p>
 		<?php } else { ?>
 			<h1>Guardado completado</h1>
-			<p>Se han guardado correctamente los datos de <?=$nombre?>.</p>
 
 			<?php if ($datosNoModificados) { ?>
 				<p>En realidad, no había modificado nada, pero no está de más que se haya asegurado pulsando el botón de guardar :)</p>
