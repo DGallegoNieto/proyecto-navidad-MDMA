@@ -50,7 +50,12 @@
 
 <br />
 
-<a href='MotorGuardar.php?id=-1'>Crear nuevo Motor</a>
+<?php
+if(isset($_SESSION["admin"])){
+    ?>
+    
+    <a href="MotorFicha.php?idMotor=-1">Nueva entrada</a> 
+<?php } ?>
 
 <br />
 <br />

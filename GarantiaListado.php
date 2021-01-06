@@ -42,7 +42,11 @@ $_SESSION["facturaMotor"] = $_REQUEST["motor"];
 
 </table>
 <br/><br/>
-<a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a>
+<?php
+if(isset($_SESSION["admin"])){
+    ?>
+    <a href="GarantiaFicha.php?idGarantia=-1">Nueva entrada</a> 
+<?php } ?>
 <br/><br/>
 <a href="Inicio.php">Volver al inicio</a>
 <br/><br/>
