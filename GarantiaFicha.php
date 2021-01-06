@@ -9,9 +9,9 @@ $_SESSION["garantiaId"] = (int)$_REQUEST["garantiaId"];
 $nuevaEntrada = ($_SESSION["garantiaId"] == -1);
 
 if($nuevaEntrada){
-    $anios = " ";
-    $kilometraje = " ";
-    $precio = " ";
+    $aniosGarantia = " ";
+    $kilometrajeGarantia = " ";
+    $precioGarantia = " ";
 }else{
 
     $sql = "SELECT anios, kilometraje, precio FROM garantia WHERE idGarantia=?";
