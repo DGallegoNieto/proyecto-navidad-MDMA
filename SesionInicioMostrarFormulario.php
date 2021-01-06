@@ -1,6 +1,4 @@
-<?php
 
-?>
 
 
 
@@ -25,6 +23,18 @@
 	<input type="submit" value="enviar">
 </form>
 <br>
+<?php
+
+if(isset($_REQUEST['error'])){
+
+	$mensaje = "Usuario y contraseña no validos";
+	
+	echo $mensaje;
+	echo "<br>";
+}
+
+?>
+
 <a href="CrearUsuario.php">¿No tiene usuario?, cree uno aquí.</a>
 
 </body>

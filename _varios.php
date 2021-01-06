@@ -93,7 +93,7 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
 }
 function comprobarAdmin(array $arrayUsuario): bool
 {
-    if ($arrayUsuario['tipo'] == "admin") {
+    if ($arrayUsuario['tipo'] == "Admin") {
         return true;
     } else {
         return false;
