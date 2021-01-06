@@ -46,7 +46,7 @@ $_SESSION["facturaMotor"] = $_REQUEST["motor"];
 <br/><br/>
 <a href="Inicio.php">Volver al inicio</a>
 <br/><br/>
-<input type="submit" value="Siguiente">
+<input type="submit" value="Ver factura">
 <br/>
 </form>
 </body>
