@@ -17,6 +17,7 @@ $rs = $select->fetchAll();
 <body>
 <h1>Listado de coches</h1>
 
+<form method="get" action="DisenioListado.php">
 <table border="1">
 
     <tr>
@@ -32,7 +33,7 @@ $rs = $select->fetchAll();
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
-            <td><input type="radio" name="coche" value='<?$fila["idCoche"]?>'</td>
+            <td><input type="radio" name="coche" value='<?=$fila["idCoche"]?>'</td>
         </tr>
     <?php } ?>
 
@@ -47,8 +48,10 @@ if(isset($_SESSION["admin"])){
 <br/>
 <a href="Inicio.php">Volver al inicio</a>
 <br/>
-<a href="DisenioListado.php">Siguiente</a>
+<input type="submit" value="Siguiente">
+<br/>
 <a href="SesionCerrar.php">Cerrar Sesión</a>
+</form>
 <br/>
 
 </body>
