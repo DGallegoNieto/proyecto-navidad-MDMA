@@ -4,16 +4,18 @@ require_once "_varios.php";
 
 $conexionBD = obtenerPdoConexionBD();
 
-
-$_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
-
+if(isset($_REQUEST["garantia"])){
+    $_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
+    $_SESSION["garantiaMarcado"] = true;
+}else{
+    $_SESSION["garantiaMarcado"] = false;
+}
 
 //SQL de Coche
 $sqlCoche = "SELECT * FROM coche WHERE idCoche=?";
 $selectCoche = $conexionBD->prepare($sqlCoche);
 $selectCoche->execute([$_SESSION["facturaCoche"]]);
 $rsCoche = $selectCoche->fetchAll();
-
 
 //SQL de Diseño
 $sqlDisenio = "SELECT * FROM disenio WHERE idDisenio=?";
@@ -22,12 +24,11 @@ $selectDisenio->execute([$_SESSION["facturaDisenio"]]);
 $rsDisenio = $selectDisenio->fetchAll();
 
 
-//SQL de Color
+//SQL de Color ---------?????
 $sqlColor = "SELECT * FROM color WHERE idColor=?";
 $selectColor = $conexionBD->prepare($sqlColor);
 $selectColor->execute([$_SESSION["facturaColor"]]);
 $rsColor = $selectColor->fetchAll();
-
 
 //SQL de Motor
 $sqlMotor = "SELECT * FROM motor WHERE idMotor=?";
@@ -35,13 +36,20 @@ $selectMotor = $conexionBD->prepare($sqlMotor);
 $selectMotor->execute([$_SESSION["facturaMotor"]]);
 $rsMotor = $selectMotor->fetchAll();
 
-
 //SQL de Garantía
 $sqlGarantia = "SELECT * FROM garantia WHERE idGarantia=?";
 $selectGarantia = $conexionBD->prepare($sqlGarantia);
 $selectGarantia->execute([$_SESSION["facturaGarantia"]]);
 $rsGarantia = $selectGarantia->fetchAll();
 
+//SQL del Precio final
+/*$sqlPrecio = "SELECT c.precio AS 'cochePrecio', d.precio AS 'disenioPrecio', m.precio AS 'motorPrecio', g.precio AS 'garantiaPrecio', (c.precio + d.precio + m.precio + g.precio) AS 'sumaTotal'
+FROM coche c, disenio d, motor m, garantia g
+WHERE c.idCoche = ? AND d.idDisenio = ? AND m.idMotor = ? AND g.idGarantia = ?";
+$selectPrecio = $conexionBD->prepare($sqlPrecio);
+$selectPrecio->execute([$_SESSION["facturaCoche"], $_SESSION["facturaDisenio"], $_SESSION["facturaMotor"], $_SESSION["facturaGarantia"]]);
+$rsPrecio = $selectPrecio->fetchAll();
+*/
 
 $precioFinal = 0;
 
@@ -67,10 +75,10 @@ $precioFinal = 0;
     <?php
     foreach ($rsCoche as $fila) { ?>
         <tr>
-            <td> <p> <?= $fila["marca"] ?> </p></td>
-            <td> <p> <?= $fila["modelo"] ?> </p></td>
-            <td> <p> <?= $fila["tipo"] ?> </p></td>
-            <td> <p> <?= $fila["precio"] ?> €</p></p></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
+            <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></td>
             <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
 
         </tr>
@@ -78,6 +86,15 @@ $precioFinal = 0;
 
 </table>
 
+<div id="menu" style=" position:absolute; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+<a href="Inicio.php">Inicio</a><br>    
+<a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="MotorListado.php">Motores</a><?php if($_SESSION["motorMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="FacturaListado.php">Factura</a><br>
+</div>    
+    
 <h2>Diseño:</h2>
 <table border="1">
 
@@ -92,11 +109,11 @@ $precioFinal = 0;
     <?php
     foreach ($rsDisenio as $fila) { ?>
         <tr>
-            <td> <p> <?= $fila["acabado"] ?> </p></td>
-            <td> <p> <?= $fila["llantas"] ?> </p></td>
-            <td> <p> <?= $fila["asientos"] ?> </p></td>
-            <td> <p> <?= $fila["parrilla"] ?> </p></td>
-            <td> <p> <?= $fila["precio"] ?> €</p></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["llantas"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
+            <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
             <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
 
         </tr>
@@ -137,14 +154,14 @@ $precioFinal = 0;
 
     <?php foreach ($rsMotor as $fila) { ?>
         <tr>
-            <td><p> <?=$fila["potencia"] ?></p></td>
-            <td><p> <?=$fila["combustible"] ?></p></td>
-            <td><p> <?=$fila["cilindrada"] ?></p></td>
-            <td><p> <?=$fila["consumo"] ?>L /100km</p></td>
-            <td><p> <?=$fila["co2"] ?>g co2</p></td>
-            <td><p> <?=$fila["cajaCambio"] ?></p></td>
-            <td><p> <?=$fila["precio"] ?>€</p></td>
-            <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["combustible"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cilindrada"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'>   <?=$fila["consumo"] ?>L /100km</a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["co2"] ?>g co2</a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
+            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>'> </td>
         </tr>
     <?php } ?>
 
@@ -161,9 +178,9 @@ $precioFinal = 0;
 
     <?php foreach ($rsGarantia as $fila) { ?>
         <tr align="center">
-            <td><p> <?= $fila["anios"] ?>       </p></td>
-            <td><p> <?= $fila["kilometraje"] ?> </p></td>
-            <td><p> <?= $fila["precio"] ?> €    </p></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
+            <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
             <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
         </tr>
     <?php } ?>

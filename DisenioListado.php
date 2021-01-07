@@ -13,7 +13,13 @@ $selectColor = $pdo->prepare($sqlColor);
 $selectColor->execute([]);
 $rsColor = $selectColor->fetchAll();
 
-$_SESSION["facturaCoche"] = $_REQUEST["coche"];
+if(isset($_REQUEST["coche"])){
+    $_SESSION["facturaCoche"] = $_REQUEST["coche"];
+    $_SESSION["cocheMarcado"]= true;
+    
+}else{
+    $_SESSION["cocheMarcado"]= false;   
+}
 
 ?>
 <html>
@@ -22,11 +28,6 @@ $_SESSION["facturaCoche"] = $_REQUEST["coche"];
 </head>
 <body>
 <h1>Listado de diseños</h1>
-
-<?= mostrarInfoUsuario() ?>
-
-<br />
-<br />
 
 <form method="get" action="MotorListado.php">
 <table border="1">
@@ -47,12 +48,20 @@ $_SESSION["facturaCoche"] = $_REQUEST["coche"];
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
-            <td><input type="radio" name="disenio" value='<?=$fila["idDisenio"]?>' </td>
+            <td><input type="radio" name="disenio" value='<?=$fila["idDisenio"]?>'> </td>
         </tr>
     <?php } ?>
 
 </table>
 
+<div id="menu" style=" position:absolute; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+<a href="Inicio.php">Inicio</a><br>    
+<a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="MotorListado.php">Motores</a><?php if($_SESSION["motorMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+<a href="FacturaListado.php">Factura</a><br>
+</div>
 
 <br />
 <?php
