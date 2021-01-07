@@ -107,3 +107,76 @@ function cerrarSesion()
 
 
 }
+
+//
+function generarCookieRecordar(array $arrayUsuario)
+{
+    $pdo = obtenerPdoConexionBD();
+
+    $codigoCookie = generarCadenaAleatoria(32);
+
+    setcookie("codigoCookie", $codigoCookie, time()+60*60*24);
+    setcookie("usuarioCookie", $arrayUsuario["identificador"], time()+60*60*24);
+
+    $sql = "UPDATE usuario SET codigoCookie=? WHERE id=?";
+    $sentencia = $pdo ->prepare($sql);
+    $sentencia->execute([$codigoCookie, $arrayUsuario["id"]]); 
+
+
+   
+}
+
+function generarCadenaAleatoria(int $longitud): string
+{
+    for ($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $longitud; $x = rand(0,$z), $s .= $a[$x], $i++);
+    return $s;
+}
+
+function borrarCookieRecordar()
+{
+    //TODO borrar cookie BD
+    setcookie("codigoCookie", "", time()-60*60*24);
+    setcookie("usuarioCookie", "", time()-60*60*24);
+
+}
+
+function hayCookieValida()
+{
+    if(isset($_COOKIE["codigoCookie"])){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function intentarCanjearSesionCookie(): bool
+{
+
+    if(isset($_COOKIE["codigoCookie"]) && isset($_COOKIE["usuarioCookie"])){
+
+        $pdo = obtenerPdoConexionBD();
+
+        $sql = "SELECT * FROM Usuario WHERE identificador=? AND codigoCookie=?";
+        $sentencia = $pdo ->prepare($sql);
+        $sentencia->execute([$_COOKIE["usuarioCookie"], $_COOKIE["codigoCookie"]]); 
+        $usuario = $sentencia->fetchAll();
+
+        $unaFilaAfectada = ($sentencia->rowCount() == 1);
+
+        if($unaFilaAfectada){
+            $_SESSION["idUsuario"] = $usuario[0]["idUsuario"];
+            $_SESSION["identificador"] = $usuario[0]["identificador"];
+            $_SESSION["contrasenna"] = $usuario[0]["contrasenna"];
+            $_SESSION["nombre"] = $usuario[0]["nombre"];
+            $_SESSION["apellidos"] = $usuario[0]["apellidos"];
+            $_SESSION["codigoCookie"] = $usuario[0]["codigoCookie"];
+            $_SESSION["tipo"] = $usuario[0]["tipo"];
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        borrarCookieRecordar();
+        return false;
+    }
+}
