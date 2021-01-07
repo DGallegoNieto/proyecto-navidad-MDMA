@@ -22,7 +22,6 @@ $usuarioUsuario = $rs[0]["usuario"];
 <h1>Ficha de <?=$nombreUsuario?></h1>
 
 
-
 <form method="post" action="UsuarioGuardar.php">
     <ul>
         <li>
@@ -43,7 +42,8 @@ $usuarioUsuario = $rs[0]["usuario"];
     <input type="submit" value="Guardar cambios" name="guardar">
 
 </form>
-
+<a href="FacturaUsuario.php">Ver mis facturas</a>
+<br />
 <a href="UsuarioEliminar.php?id=<?=$_SESSION["idUsuario"]?>">Eliminar mi cuenta</a>
 <br />
 <a href="Inicio.php">Volver al inicio</a>
