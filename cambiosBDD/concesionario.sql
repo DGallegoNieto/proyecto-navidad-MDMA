@@ -178,19 +178,20 @@ CREATE TABLE `usuario` (
   `nombre` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellido` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `usuario` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `contrasenna` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `contrasenna` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `codigoCookie` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `tipo`, `nombre`, `apellido`, `usuario`, `contrasenna`) VALUES
-(1, 'Admin', 'Admin', 'Admin', 'Admin', 'Admin'),
-(2, 'Cliente', 'Marti', 'Stefanov', 'marti', 'marti'),
-(3, 'Cliente', 'David', 'Gallego', 'david', 'david'),
-(4, 'Cliente', 'Alejandro', 'Gomez', 'alejandro', 'alejandro'),
-(5, 'Cliente', 'Mario', 'Garcia', 'mario', 'mario');
+INSERT INTO `usuario` (`idUsuario`, `tipo`, `nombre`, `apellido`, `usuario`, `contrasenna`,`codigoCookie`) VALUES
+(1, 'Admin', 'Admin', 'Admin', 'Admin', 'Admin',NULL),
+(2, 'Cliente', 'Marti', 'Stefanov', 'marti', 'marti',NULL),
+(3, 'Cliente', 'David', 'Gallego', 'david', 'david',NULL),
+(4, 'Cliente', 'Alejandro', 'Gomez', 'alejandro', 'alejandro',NULL),
+(5, 'Cliente', 'Mario', 'Garcia', 'mario', 'mario',NULL);
 
 --
 -- Índices para tablas volcadas
