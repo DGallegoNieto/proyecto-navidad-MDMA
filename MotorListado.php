@@ -29,6 +29,11 @@
 
 <h1>Motores</h1>
 
+<?= mostrarInfoUsuario() ?>
+
+<br />
+<br />
+
 <form method="get" action="GarantiaListado.php">
 <table border='1'>
 

@@ -17,6 +17,10 @@ $rs = $select->fetchAll();
 <body>
 <h1>Listado de coches</h1>
 
+<?= mostrarInfoUsuario() ?>
+
+<br />
+<br />
 <form method="get" action="DisenioListado.php">
 <table border="1">
 

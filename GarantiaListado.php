@@ -22,6 +22,11 @@ $_SESSION["facturaMotor"] = $_REQUEST["motor"];
 
 <h1>Listado de Garantías</h1>
 
+<?= mostrarInfoUsuario() ?>
+
+<br />
+<br />
+
 <form action="FacturaListado.php" method="get">
 <table border='1'>
 

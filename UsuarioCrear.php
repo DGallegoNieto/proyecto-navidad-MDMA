@@ -13,7 +13,7 @@ require_once"_Varios.php";
 <body>
 <h1>Creación de nuevo usuario</h1>
 
-<form action="CrearUsuario.php" method="post">
+<form action="UsuarioCrear.php" method="post">
 	<label>Nombre de usuario</label>
 	<input type="text" name="usuario">
 	<br>

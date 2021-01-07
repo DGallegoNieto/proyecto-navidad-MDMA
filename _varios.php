@@ -35,6 +35,7 @@ function syso(string $contenido)
 {
     file_put_contents('php://stderr', $contenido . "\n");
 }
+
 // funciones para crear un usuario y comprobar si existe el usuario que se va a crear (Alex)
 function comprobarUsuario(string $usuario): bool
 {
@@ -86,6 +87,8 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
 {
 	$_SESSION["idUsuario"]= $arrayUsuario['idUsuario'];
 	$_SESSION["usuario"]= $arrayUsuario['usuario'];
+	$_SESSION["nombre"] = $arrayUsuario['nombre'];
+	$_SESSION["apellido"] = $arrayUsuario['apellido'];
 	if($admin == true){
 		$_SESSION["admin"] = $admin;
 	}
@@ -179,4 +182,23 @@ function intentarCanjearSesionCookie(): bool
         borrarCookieRecordar();
         return false;
     }
+}
+
+function haySesionIniciada(): bool
+{
+    if(isset($_SESSION["idUsuario"])){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+function mostrarInfoUsuario()
+{
+    if(haySesionIniciada()){
+        echo "<span><p>Bienvenido, <a href='UsuarioFicha.php'>$_SESSION[nombre] $_SESSION[apellido]</a>.</p><a href='SesionCerrar.php'>Cerrar sesión</a></span>";
+    } else{
+        echo "<span><a href='SesionInicioMostrarFormulario.php'>Iniciar sesión</a></span>";
+    }
+
 }

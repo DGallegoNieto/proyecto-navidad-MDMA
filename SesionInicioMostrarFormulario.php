@@ -35,7 +35,7 @@ if(isset($_REQUEST['error'])){
 
 ?>
 
-<a href="CrearUsuario.php">¿No tiene usuario?, cree uno aquí.</a>
+<a href="UsuarioCrear.php">¿No tiene usuario? Cree uno aquí.</a>
 
 </body>
 
