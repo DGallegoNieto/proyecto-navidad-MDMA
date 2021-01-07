@@ -84,7 +84,7 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
 
 	function marcarSesionComoIniciada(array $arrayUsuario, bool $admin)
 {
-	$_SESSION["id"]= $arrayUsuario['id'];
+	$_SESSION["idUsuario"]= $arrayUsuario['idUsuario'];
 	$_SESSION["usuario"]= $arrayUsuario['usuario'];
 	if($admin == true){
 		$_SESSION["admin"] = $admin;
