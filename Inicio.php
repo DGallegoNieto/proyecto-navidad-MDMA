@@ -30,7 +30,7 @@
     <p><b>GARANTÍA:</b> 3 AÑOS</p>
     <p><b>MOTOR:</b> GASOLINA 150CV MANUAL</p>
     <p><b>PRECIO: 32.500€</b> </p>
-    <img src="volkswagen.jfif" width="248px">
+    <img src="imagenes/volkswagen.jfif" width="248px">
     </br></br>
 </div1>
 
@@ -42,7 +42,7 @@
     <p><b>GARANTÍA:</b> 4 AÑOS</p>
     <p><b>MOTOR:</b> DIESEL 190CV AUTOMÁTICO</p>
     <p><b>PRECIO: 28.900€</b> </p>
-    <img src="audiA4.jfif" width="301px">
+    <img src="imagenes/audiA4.jfif" width="301px">
     </br></br>
 </div2>
 
@@ -54,7 +54,7 @@
     <p><b>GARANTÍA:</b> 3 AÑOS</p>
     <p><b>MOTOR:</b> DIESEL 150CV MANUAL</p>
     <p><b>PRECIO: 19.500€</b> </p>
-    <img src="seatCordoba.jfif" width="228px">
+    <img src="imagenes/seatCordoba.jfif" width="228px">
     </br></br>
 </div3>
 
