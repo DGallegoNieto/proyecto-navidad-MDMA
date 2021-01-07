@@ -38,14 +38,16 @@ $selectGarantia->execute([$_SESSION["facturaGarantia"]]);
 $rsGarantia = $selectGarantia->fetchAll();
 
 //SQL del Precio final
-$sqlPrecio = "SELECT c.precio 'cochePrecio', d.precio 'disenioPrecio', m.precio 'motorPrecio', g.precio 'garantiaPrecio', (c.precio + d.precio + m.precio + g.precio) 'sumaTotal'
-FROM coche c, disenio d, motor m, garantia g 
+/*$sqlPrecio = "SELECT c.precio AS 'cochePrecio', d.precio AS 'disenioPrecio', m.precio AS 'motorPrecio', g.precio AS 'garantiaPrecio', (c.precio + d.precio + m.precio + g.precio) AS 'sumaTotal'
+FROM coche c, disenio d, motor m, garantia g
 WHERE c.idCoche = ? AND d.idDisenio = ? AND m.idMotor = ? AND g.idGarantia = ?";
 $selectPrecio = $conexionBD->prepare($sqlPrecio);
 $selectPrecio->execute([$_SESSION["facturaCoche"], $_SESSION["facturaDisenio"], $_SESSION["facturaMotor"], $_SESSION["facturaGarantia"]]);
 $rsPrecio = $selectPrecio->fetchAll();
+*/
 
-$precioFinal = $rsPrecio[0]["sumaTotal"];
+$precioFinal = 0;
+
 ?>
 
 <html>
@@ -72,6 +74,8 @@ $precioFinal = $rsPrecio[0]["sumaTotal"];
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></p></td>
+            <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
+
         </tr>
     <?php } ?>
 
@@ -96,6 +100,8 @@ $precioFinal = $rsPrecio[0]["sumaTotal"];
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["parrilla"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
+            <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
+
         </tr>
     <?php } ?>
 
@@ -120,6 +126,33 @@ $precioFinal = $rsPrecio[0]["sumaTotal"];
 
 <h2>Motor:</h2>
 
+<table border='1'>
+
+    <tr>
+        <th>Potencia</th>
+        <th>Combustible</th>
+        <th>Cilindrada</th>
+        <th>Consumo</th>
+        <th>Emisiones</th>
+        <th>Caja de cambios</th>
+        <th>Precio</th>
+    </tr>
+
+    <?php foreach ($rsMotor as $fila) { ?>
+        <tr>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["combustible"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cilindrada"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'>   <?=$fila["consumo"] ?>L /100km</a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["co2"] ?>g co2</a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></td>
+            <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
+            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>'> </td>
+        </tr>
+    <?php } ?>
+
+</table>
+
 <h2>Garantía:</h2>
 <table border='1'>
 
@@ -134,15 +167,19 @@ $precioFinal = $rsPrecio[0]["sumaTotal"];
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
+            <?php $precioFinal = $precioFinal + (int)$fila["precio"] ?>
         </tr>
     <?php } ?>
 
 </table>
 
-<h2>Precio final: <?=$precioFinal?></h2>
+<h2>Precio final: <?=$precioFinal?> €</h2>
+
+<?php $_SESSION["precioFinal"] = $precioFinal ?>
 <br />
 
-<a href="">Guardar</a>
+<a href="GarantiaListado.php">Volver</a>
+<a href="FacturaGuardar.php">Guardar</a>
 
 </body>
 </html>
