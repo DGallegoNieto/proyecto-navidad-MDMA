@@ -1,7 +1,5 @@
 <?php
-//Listado
-//Seleccionar solo 1
-//Admins puedan editar (añadir/eliminar) motores
+
 
 	require_once "_varios.php";
 
@@ -53,7 +51,7 @@
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["co2"] ?>g co2</a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
-            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>'> </td>
+            <td><input type="radio" name="motor" value='<?=$fila["idMotor"]?>'> </td>
         </tr>
 	<?php } ?>
 
