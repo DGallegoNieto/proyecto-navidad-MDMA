@@ -1,10 +1,14 @@
 <?php
 require_once "_varios.php";
-
+if($_SESSION["cocheMarcado"]==true || $_SESSION["disenioMarcado"]==true || $_SESSION["motorMarcado"]==true || $_SESSION["garantiaMarcado"]==true){
+    
+}
+else{
 $_SESSION["cocheMarcado"] = false;
 $_SESSION["disenioMarcado"] = false;
 $_SESSION["motorMarcado"] = false;
 $_SESSION["garantiaMarcado"] = false;
+}
 
 $pdo = obtenerPdoConexionBD();
 

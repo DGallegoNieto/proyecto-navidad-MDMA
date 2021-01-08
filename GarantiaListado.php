@@ -45,7 +45,7 @@ if(isset($_REQUEST["motor"])){
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
-            <td><input type="radio" name="garantia" value='<?=$fila["idGarantia"]?>'</td>
+            <td><input type="radio" name="garantia" value='<?=$fila["idGarantia"]?>'></td>
         </tr>
     <?php } ?>
 
@@ -64,7 +64,7 @@ if(isset($_REQUEST["motor"])){
 <?php
 if(isset($_SESSION["admin"])){
     ?>
-    <a href="GarantiaFicha.php?idGarantia=-1">Nueva entrada</a> 
+    <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a> 
 <?php } ?>
 <br/><br/>
 <a href="Inicio.php">Volver al inicio</a>

@@ -192,7 +192,33 @@ $precioFinal = 0;
 <br />
 
 <a href="GarantiaListado.php">Volver</a>
+
+<?php if($_SESSION["cocheMarcado"]==false){ ?>
+	<div>
+		<p> No has seleccionado un coche.</p>
+	</div>
+<?php  }?>
+
+<?php if($_SESSION["disenioMarcado"]==false){ ?>
+	<div>
+		<p> No has seleccionado un disenio.</p>
+	</div>
+<?php  }?>
+
+<?php if($_SESSION["motorMarcado"]==false){ ?>
+	<div>
+		<p> No has seleccionado un motor.</p>
+	</div>
+<?php  }?>
+
+<?php if($_SESSION["garantiaMarcado"]==false){ ?>
+	<div>
+		<p> No has seleccionado un disenio.</p>
+	</div>
+<?php  }?>
+
 <a href="FacturaGuardar.php">Guardar</a>
+
 
 </body>
 </html>
