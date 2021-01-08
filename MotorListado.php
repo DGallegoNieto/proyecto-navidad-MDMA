@@ -87,10 +87,12 @@
 
 
 <br />
-
+<br/>
 <input type="submit" value="Siguiente">
 <br />
+
 </form>
+
 <button onclick="location.href='DisenioListado.php'">Volver</button>
 </body>
 

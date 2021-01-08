@@ -64,14 +64,15 @@ if(isset($_REQUEST["motor"])){
 <?php
 if(isset($_SESSION["admin"])){
     ?>
-    <a href="GarantiaFicha.php?idGarantia=-1">Nueva entrada</a> 
+    <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a>
 <?php } ?>
 <br/><br/>
-<a href="Inicio.php">Volver al inicio</a>
-<br/><br/>
+
+<br/>
 <input type="submit" value="Ver factura">
 <br/>
 </form>
+<button onclick="location.href='MotorListado.php'">Volver</button>
 </body>
 
 </html>
