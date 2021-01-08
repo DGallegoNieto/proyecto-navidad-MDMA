@@ -30,9 +30,9 @@ if(isset($_REQUEST["coche"])){
 <h1>Listado de diseños</h1>
 
 <form method="get" action="MotorListado.php">
-<table border="1">
+<table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
-    <tr>
+        <tr bgcolor='#a9a9a9' align='center'>
         <th>Acabado</th>
         <th>Llantas</th>
         <th>Asientos</th>
@@ -54,7 +54,7 @@ if(isset($_REQUEST["coche"])){
 
 </table>
 
-<div id="menu" style=" position:absolute; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+<div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
 <a href="Inicio.php">Inicio</a><br>    
 <a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
 <a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
@@ -73,9 +73,9 @@ if(isset($_SESSION["admin"])){
 
 
 <h2>Colores disponibles</h2>
-<table border="1" >
+<table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
-    <tr>
+    <tr bgcolor='#a9a9a9' align='center'>
         <th colspan="3">Color</th>
     </tr>
     <?php

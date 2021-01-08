@@ -22,9 +22,9 @@ $rs = $select->fetchAll();
 <h1>Listado de coches</h1>
 
 <form method="get" action="DisenioListado.php">
-<table border="1">
+<table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
-    <tr>
+    <tr bgcolor='#a9a9a9' align='center'>
         <th>Marca</th>
         <th>Modelo</th>
         <th>Tipo</th>
@@ -43,7 +43,7 @@ $rs = $select->fetchAll();
 
 </table>
     
-<div id="menu" style=" position:absolute; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+<div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
 <a href="Inicio.php">Inicio</a><br>    
 <a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
 <a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
