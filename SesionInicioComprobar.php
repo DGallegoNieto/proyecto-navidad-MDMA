@@ -23,7 +23,7 @@ echo $admin;
 
 if ($arrayUsuario != null) { 
 	marcarSesionComoIniciada($arrayUsuario, $admin);
-    redireccionar("CocheListado.php");
+    redireccionar("Inicio.php");
     
     
 	

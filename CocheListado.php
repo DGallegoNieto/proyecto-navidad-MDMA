@@ -1,5 +1,6 @@
 <?php
 require_once "_varios.php";
+
 $_SESSION["cocheMarcado"] = false;
 $_SESSION["disenioMarcado"] = false;
 $_SESSION["motorMarcado"] = false;
@@ -20,6 +21,10 @@ $rs = $select->fetchAll();
 </head>
 <body>
 <h1>Listado de coches</h1>
+
+<?=mostrarInfoUsuario()?>
+<br />
+<br />
 
 <form method="get" action="DisenioListado.php">
 <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
@@ -64,7 +69,6 @@ if(isset($_SESSION["admin"])){
 <br/>
 <input type="submit" value="Siguiente">
 <br/>
-<a href="SesionCerrar.php">Cerrar Sesión</a>
 </form>
 <br/>
 

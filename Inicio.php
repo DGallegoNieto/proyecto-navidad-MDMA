@@ -9,6 +9,9 @@
 //Admins
 //ver facturas
 //editar coche, motor, garantia, disenio...
+
+require_once "_varios.php";
+
 ?>
 <html>
 <style type="text/css">
@@ -18,9 +21,16 @@
 
 </style>
 
-<h3 align="right"><a href="SesionInicioMostrarFormulario.php">Iniciar sesión</a></h3>
 <h1><b><u>CONCESIONARIO DE COCHES</u></b></h1>
+
+<?php mostrarInfoUsuario(); ?>
+
+<?php if(haySesionIniciada()){ ?>
+
 <H3>CREA TU PROPIO COCHE PERSONALIZADO <a href="CocheListado.php" >AQUÍ</a></H3>
+
+<?php } ?>
+
 <h3>COCHES MÁS VENDIDOS:</h3>
 <div1>
 <b><u>VOLKSWAGEN TIGUAN</u></b>

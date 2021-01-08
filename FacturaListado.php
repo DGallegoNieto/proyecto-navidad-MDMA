@@ -161,7 +161,6 @@ $precioFinal = 0;
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["co2"] ?>g co2</a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
-            <td><input type="radio" name="motor" value='<?$fila["idMotor"]?>'> </td>
         </tr>
     <?php } ?>
 

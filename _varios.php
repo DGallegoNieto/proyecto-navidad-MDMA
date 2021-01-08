@@ -123,7 +123,7 @@ function generarCookieRecordar(array $arrayUsuario)
 
     $sql = "UPDATE usuario SET codigoCookie=? WHERE id=?";
     $sentencia = $pdo ->prepare($sql);
-    $sentencia->execute([$codigoCookie, $arrayUsuario["id"]]); 
+    $sentencia->execute([$codigoCookie, $arrayUsuario["idUsuario"]]);
 
 
    

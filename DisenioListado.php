@@ -29,6 +29,10 @@ if(isset($_REQUEST["coche"])){
 <body>
 <h1>Listado de diseños</h1>
 
+<?=mostrarInfoUsuario()?>
+<br />
+<br />
+
 <form method="get" action="MotorListado.php">
 <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
