@@ -99,7 +99,7 @@ if(isset($_SESSION["admin"])){
 </form>
 
 <br/>
-<a href="CocheListado.php">Atrás</a>
+<button onclick="location.href='CocheListado.php'">Volver</button>
 <br/>
 
 

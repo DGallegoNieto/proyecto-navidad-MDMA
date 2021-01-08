@@ -108,10 +108,9 @@ function cerrarSesion()
     session_destroy();
     session_unset();
 
-
 }
 
-//
+
 function generarCookieRecordar(array $arrayUsuario)
 {
     $pdo = obtenerPdoConexionBD();
@@ -119,13 +118,11 @@ function generarCookieRecordar(array $arrayUsuario)
     $codigoCookie = generarCadenaAleatoria(32);
 
     setcookie("codigoCookie", $codigoCookie, time()+60*60*24);
-    setcookie("usuarioCookie", $arrayUsuario["identificador"], time()+60*60*24);
+    setcookie("usuarioCookie", $arrayUsuario["usuario"], time()+60*60*24);
 
     $sql = "UPDATE usuario SET codigoCookie=? WHERE id=?";
     $sentencia = $pdo ->prepare($sql);
     $sentencia->execute([$codigoCookie, $arrayUsuario["idUsuario"]]);
-
-
    
 }
 
@@ -159,7 +156,7 @@ function intentarCanjearSesionCookie(): bool
 
         $pdo = obtenerPdoConexionBD();
 
-        $sql = "SELECT * FROM Usuario WHERE identificador=? AND codigoCookie=?";
+        $sql = "SELECT * FROM usuario WHERE usuario=? AND codigoCookie=?";
         $sentencia = $pdo ->prepare($sql);
         $sentencia->execute([$_COOKIE["usuarioCookie"], $_COOKIE["codigoCookie"]]); 
         $usuario = $sentencia->fetchAll();
@@ -168,10 +165,10 @@ function intentarCanjearSesionCookie(): bool
 
         if($unaFilaAfectada){
             $_SESSION["idUsuario"] = $usuario[0]["idUsuario"];
-            $_SESSION["identificador"] = $usuario[0]["identificador"];
+            $_SESSION["usuario"] = $usuario[0]["usuario"];
             $_SESSION["contrasenna"] = $usuario[0]["contrasenna"];
             $_SESSION["nombre"] = $usuario[0]["nombre"];
-            $_SESSION["apellidos"] = $usuario[0]["apellidos"];
+            $_SESSION["apellido"] = $usuario[0]["apellido"];
             $_SESSION["codigoCookie"] = $usuario[0]["codigoCookie"];
             $_SESSION["tipo"] = $usuario[0]["tipo"];
             return true;

@@ -44,22 +44,27 @@ if($nuevaEntrada){
         <li>
             <strong>Acabado: </strong>
             <input type="text" name="acabado" value="<?=$acabadoDisenio?>">
+            <br /><br />
         </li>
         <li>
             <strong>Llantas: </strong>
-            <input type="text" name="llantas" value="<?=$llantasDisenio?>">
+            <input type="text" name="llantas" value="<?=$llantasDisenio?>"'>
+            <br /><br />
         </li>
         <li>
             <strong>Asientos: </strong>
             <input type="text" name="asientos" value="<?=$asientosDisenio?>">
+            <br /><br />
         </li>
         <li>
             <strong>Parrilla: </strong>
             <input type="text" name="parrilla" value="<?=$parrillaDisenio?>">
+            <br /><br />
         </li>
         <li>
             <strong>Precio: </strong>
             <input type="text" name="precio" value="<?=$precioDisenio?>">
+            <br /><br />
         </li>
 
     </ul>
@@ -69,9 +74,8 @@ if($nuevaEntrada){
         <input type="submit" value="Guardar cambios" name="guardar">
     <?php } ?>
 </form>
-
+<button onclick="location.href='DisenioListado.php'">Volver</button>
+<br /><br />
 <a href="DisenioEliminar.php?id=<?=$_SESSION["disenioId"]?>">Eliminar</a>
-<br />
-<a href="DisenioListado.php">Volver</a>
 
 </html>

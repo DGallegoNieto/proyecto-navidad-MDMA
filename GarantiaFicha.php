@@ -40,14 +40,18 @@ if($nuevaEntrada){
         <li>
             <strong>Anios: </strong>
             <input type="text" name="anios" value="<?=$aniosGarantia?>">
+            <br /><br />
         </li>
         <li>
             <strong>Kilometraje: </strong>
             <input type="text" name="kilometraje" value="<?=$kilometrajeGarantia?>">
+            <br /><br />
+
         </li>
         <li>
             <strong>Precio: </strong>
             <input type="text" name="precio" value="<?=$precioGarantia?>">
+            <br /><br />
         </li>
 
     </ul>
@@ -57,10 +61,7 @@ if($nuevaEntrada){
         <input type="submit" value="Guardar cambios" name="guardar">
     <?php } ?>
 </form>
-
-<br />
-<a href="GarantiaListado.php">Volver al listado de garantías</a>
+<button onclick="location.href='GarantiaListado.php'">Volver</button>
 <br /><br />
 <a href="GarantiaEliminar.php?id=<?=$_SESSION["garantiaId"]?>">Eliminar garantía</a>
-
 </html>

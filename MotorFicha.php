@@ -65,29 +65,43 @@
 
 <input type='hidden' name='idMotor' value='<?=$idMotor?>' />
 
-    <label for='potencia'>Potencia</label>
-	<input type='text' name='potencia' value='<?=$potenciaMotor?>' />                
-    <br/>
-    <label for='combustible'>Combustible</label>
-	<input type='text' name='combustible' value='<?=$combustibleMotor?>' />                
-    <br/>
-    <label for='cilindrada'>Cilindrada</label>
-	<input type='text' name='cilindrada' value='<?=$cilindradaMotor?>' />                
-    <br/>
-    <label for='consumo'>Consumo</label>
-	<input type='text' name='consumo' value='<?=$consumoMotor?>' />                
-    <br/>
-    <label for='co2'>Co2</label>
-	<input type='text' name='co2' value='<?=$co2Motor?>' />                
-    <br/>
-    <label for='cajaCambio'>Caja de Cambios</label>
-	<input type='text' name='cajaCambio' value='<?=$cajaCambioMotor?>' />                
-    <br/>
-    <label for='precio'>Precio</label>
-	<input type='text' name='precio' value='<?=$precioMotor?>' />                
-    <br/>
-    
-    <br/>
+    <ul>
+        <li>
+            <strong>Potencia: </strong>
+            <input type="text" name="potencia" value="<?=$potenciaMotor?>">
+            <br /><br />
+        </li>
+        <li>
+            <strong>Combustible: </strong>
+            <input type="text" name="combustible" value="<?=$combustibleMotor?>"'>
+            <br /><br />
+        </li>
+        <li>
+            <strong>Cilindrada: </strong>
+            <input type="text" name="cilindrada" value="<?=$cilindradaMotor?>">
+            <br /><br />
+        </li>
+        <li>
+            <strong>Consumo: </strong>
+            <input type="text" name="consumo" value="<?=$consumoMotor?>">
+            <br /><br />
+        </li>
+        <li>
+            <strong>Co2: </strong>
+            <input type="text" name="co2" value="<?=$co2Motor?>">
+            <br /><br />
+        </li>
+        <li>
+            <strong>Caja de cambios: </strong>
+            <input type="text" name="cajaCambio" value="<?=$cajaCambioMotor?>">
+            <br /><br />
+        </li>
+        <li>
+            <strong>Precio: </strong>
+            <input type="text" name="precio" value="<?=$precioMotor?>">
+            <br /><br />
+        </li>
+    </ul>
 
 <?php if ($nuevaEntrada) { ?>
 	<input type='submit' name='crear' value='Crear nuevo motor' />
@@ -96,32 +110,9 @@
 <?php } ?>
 
 </form>
-
-<br />
-<?php if ($idMotor != -1) { ?>
-<p>Datos del motor</p>
-
-<ul>
-<?php
-    foreach ($rsMotores as $fila) {
-        echo "Id: $fila[idMotor]</br> Potencia: $fila[potencia]</br> Combustible: $fila[combustible]</br> Cilindrada: $fila[cilindrada]</br> Consumo: $fila[consumo]</br> Emision Co2: $fila[co2]</br> Caja de cambios: $fila[cajaCambio]</br> Precio: $fila[precio]";
-        
-    }
-?>
-</ul>
-
-<?php } ?>
-
-<?php if (!$nuevaEntrada) { ?>
-    <br />
-    <a href='MotorEliminar.php?idMotor=<?=$idMotor?>'>Eliminar Motor</a>
-<?php } ?>
-
-<br />
-<br />
-
-<a href='MotorListado.php'>Volver a la lista de motores.</a>
-
+<button onclick="location.href='MotorListado.php'">Volver</button>
+<br /><br />
+<a href="MotorEliminar.php?id=<?=$_SESSION["motorId"]?>">Eliminar</a>
 </body>
 
 </html>

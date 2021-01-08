@@ -69,13 +69,12 @@ if(isset($_SESSION["admin"])){
 <?php } ?>
 
 <br/>
-<a href="Inicio.php">Volver al inicio</a>
 <br/>
 <input type="submit" value="Siguiente">
 <br/>
 </form>
 <br/>
-
+<button onclick="location.href='Inicio.php'">Volver al inicio</button>
 </body>
 
 </html>

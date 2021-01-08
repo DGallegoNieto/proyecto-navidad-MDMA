@@ -42,18 +42,22 @@ if($nuevaEntrada){
         <li>
             <strong>Marca: </strong>
             <input type="text" name="marca" value="<?=$marcaCoche?>">
+        </br></br>
         </li>
         <li>
             <strong>Modelo: </strong>
             <input type="text" name="modelo" value="<?=$modeloCoche?>">
+            </br></br>
         </li>
         <li>
             <strong>Tipo: </strong>
             <input type="text" name="tipo" value="<?=$tipoCoche?>">
+            </br></br>
         </li>
         <li>
             <strong>Precio: </strong>
             <input type="text" name="precio" value="<?=$precioCoche?>">
+            </br></br>
         </li>
 
     </ul>
@@ -63,9 +67,8 @@ if($nuevaEntrada){
         <input type="submit" value="Guardar cambios" name="guardar">
     <?php } ?>
 </form>
-
+<button onclick="location.href='CocheListado.php'">Volver</button>
+<br /><br />
 <a href="CocheEliminar.php?id=<?=$_SESSION["cocheId"]?>">Eliminar</a>
-<br />
-<a href="CocheListado.php">Volver</a>
 
 </html>
