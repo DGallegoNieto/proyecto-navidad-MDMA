@@ -8,7 +8,7 @@ if(isset($_REQUEST["garantia"])){
     $_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
     $_SESSION["garantiaMarcado"] = true;
 }else{
-    $_SESSION["garantiaMarcado"] = false;
+    
 }
 
 //SQL de Coche
