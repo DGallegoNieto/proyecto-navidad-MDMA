@@ -74,7 +74,7 @@ $precioFinal = 0;
     </tr>
     <?php
     foreach ($rsCoche as $fila) { ?>
-        <tr>
+        <tr align='center'>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["modelo"] ?> </a></td>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["tipo"] ?> </a></td>
@@ -108,7 +108,7 @@ $precioFinal = 0;
     </tr>
     <?php
     foreach ($rsDisenio as $fila) { ?>
-        <tr>
+        <tr align='center'>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["llantas"] ?> </a></td>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["asientos"] ?> </a></td>
@@ -130,7 +130,7 @@ $precioFinal = 0;
     </tr>
     <?php
     foreach ($rsColor as $filaColor) { ?>
-        <tr>
+        <tr align='center'>
 
             <td><p> <?= $filaColor["color"] ?> </p></td>
             <td style="background-color:<?=$filaColor["hexadecimal"]?>; width: 15px; height: 10px;"></td>
@@ -153,7 +153,7 @@ $precioFinal = 0;
     </tr>
 
     <?php foreach ($rsMotor as $fila) { ?>
-        <tr>
+        <tr align='center'>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["combustible"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cilindrada"] ?></a></td>
