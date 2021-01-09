@@ -38,6 +38,12 @@ require_once"_Varios.php";
 <?php
 	
 //*TODO poner un minimo de longitud en todos los campos*
+if(isset($_GET["errorC"])){
+	echo "Las contraseñas no coinciden.";
+}
+if(isset($_GET["errorU"])){
+	echo "El usuario que quieres usar ya esta siendo utilizado";
+}
 if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])&& isset($_REQUEST["nombre"]) && isset($_REQUEST["apellido"])) {
 
 	$contrasenia = trim($_REQUEST["contrasenia"]);
@@ -47,18 +53,19 @@ if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])&& isset($_REQU
 	$apellido = trim($_REQUEST["apellido"]);
 
 	
+	if(comprobarUsuario($usuario)){
+		redireccionar("UsuarioCrear.php?errorU");
+
+}
 
 	if($contrasenia != $contraseniaC || $contrasenia==" " || $contraseniaC==""){
-		echo "Las contraseñas no coinciden";
+		
+		redireccionar("UsuarioCrear.php?errorC");
 }
-	elseif(comprobarUsuario($usuario)){
-		echo " El usuario que quieres usar ya esta siendo utilizado";
 
-
-}
-	else 
+	
 	//metodo que crea el usuario
-	echo "che pelotudo funcionó";
+	
 	crearUsuario($usuario,$contrasenia,$nombre,$apellido);
 
 	redireccionar("SesionInicioMostrarFormulario.php");

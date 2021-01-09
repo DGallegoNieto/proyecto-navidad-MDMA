@@ -36,6 +36,15 @@ $usuarioUsuario = $rs[0]["usuario"];
             <strong>Usuario: </strong>
             <input type="text" name="usuario" value="<?=$usuarioUsuario?>">
         </li>
+         <li>
+            <strong>Cambiar Contraseña: </strong>
+            <input type="text" name="contrasenia">
+        </li>
+
+        <li>
+            <strong>Confirmar Cambio Contraseña: </strong>
+            <input type="text" name="contraseniaC">
+        </li>
 
     </ul>
 
@@ -49,3 +58,16 @@ $usuarioUsuario = $rs[0]["usuario"];
 <a href="Inicio.php">Volver al inicio</a>
 
 </html>
+<?php
+if(isset($_GET["errorC"])){
+    ?>
+    
+    <br/>
+    <?php
+    echo "Las contraseñas no coinciden.";
+}
+
+
+
+
+

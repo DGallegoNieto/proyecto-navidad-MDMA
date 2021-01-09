@@ -28,7 +28,10 @@ $noExistia = ($sqlConExito && $ningunaFilaAfectada);
 
 <body>
 
-<?php if ($correcto) { ?>
+<?php if ($correcto) {
+	cerrarSesion();
+
+		 ?>
 
     <h1>Eliminación completada</h1>
     <p>Se ha eliminado correctamente el usuario.</p>

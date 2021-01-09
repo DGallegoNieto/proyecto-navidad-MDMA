@@ -40,7 +40,7 @@ function syso(string $contenido)
 function comprobarUsuario(string $usuario): bool
 {
     $conexionBD= obtenerPdoConexionBD();
-    $sql = 'SELECT * FROM Usuario WHERE idUsuario=? ';
+    $sql = 'SELECT * FROM Usuario WHERE usuario=? ';
     $consulta = $conexionBD->prepare($sql);
     $consulta->execute([$usuario]);
     $rs = $consulta->fetchAll();

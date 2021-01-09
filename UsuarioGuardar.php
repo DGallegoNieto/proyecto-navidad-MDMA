@@ -2,16 +2,25 @@
 
 require_once "_varios.php";
 
+
 $pdo = obtenerPdoConexionBD();
 
 $nombreUsuario = $_REQUEST["nombre"];
 $apellidoUsuario = $_REQUEST["apellido"];
 $usuarioUsuario = $_REQUEST["usuario"];
+$contrasenia = trim($_REQUEST["contrasenia"]);
+$contraseniaC = trim($_REQUEST["contraseniaC"]);
 
 
 
-$sql = "UPDATE usuario SET nombre=?, apellido=?, usuario=? WHERE idUsuario=?";
-$parametros = [$nombreUsuario, $apellidoUsuario, $usuarioUsuario, $_SESSION["idUsuario"]];
+	
+
+if($contrasenia != $contraseniaC || $contrasenia==" " || $contraseniaC==""){
+		redireccionar("UsuarioFicha.php?errorC");
+
+}
+$sql = "UPDATE usuario SET nombre=?, apellido=?, usuario=?, contrasenna=? WHERE idUsuario=?";
+$parametros = [$nombreUsuario, $apellidoUsuario, $usuarioUsuario,$contrasenia, $_SESSION["idUsuario"]];
 
 
 $sentencia = $pdo->prepare($sql);
@@ -25,6 +34,7 @@ $ninguna_fila_afectada = ($sentencia->rowCount() == 0);
 $correcto = ($sql_con_exito && $una_fila_afectada);
 
 $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
+
 ?>
 
 
@@ -40,7 +50,16 @@ $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
 
 <?php
 
-if ($correcto || $datos_no_modificados) { ?>
+if ($correcto || $datos_no_modificados) {
+$arrayUsuario= obtenerUsuario($usuarioUsuario,$contrasenia);
+if(isset($_SESSION["admin"])){
+	$admin=true;
+}
+else{
+	$admin=false;
+}
+marcarSesionComoIniciada($arrayUsuario,$admin);
+ ?>
 
         <h1>Guardado completado</h1>
         <p>Se han guardado correctamente los datos del usuario.</p>
