@@ -45,6 +45,9 @@ if(isset($_REQUEST["coche"])){
 
     </tr>
     <?php
+
+    if(isset($_SESSION["admin"])){ //Si hay sesión como admin muestra enlaces a la ficha
+
     foreach ($rs as $fila) { ?>
         <tr>
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["acabado"] ?> </a></td>
@@ -54,7 +57,19 @@ if(isset($_REQUEST["coche"])){
             <td> <a href='DisenioFicha.php?disenioId=<?=$fila["idDisenio"]?>'> <?= $fila["precio"] ?> €</a></td>
             <td><input type="radio" name="disenio" value='<?=$fila["idDisenio"]?>'> </td>
         </tr>
-    <?php } ?>
+    <?php }
+    } else { //Si es un usuario normal
+        foreach ($rs as $fila) { ?>
+            <tr>
+                <td> <p> <?= $fila["acabado"] ?>  </p></td>
+                <td> <p> <?= $fila["llantas"] ?>  </p></td>
+                <td> <p> <?= $fila["asientos"] ?> </p></td>
+                <td> <p> <?= $fila["parrilla"] ?> </p></td>
+                <td> <p> <?= $fila["precio"] ?> € </p></td>
+                <td><input type="radio" name="disenio" value='<?=$fila["idDisenio"]?>'> </td>
+            </tr>
+        <?php }
+    }?>
 
 </table>
 

@@ -40,14 +40,28 @@ if(isset($_REQUEST["motor"])){
         <th>Precio</th>
     </tr>
 
-    <?php foreach ($rs as $fila) { ?>
+    <?php
+
+    if(isset($_SESSION["admin"])){ //Si hay sesión como admin muestra enlaces a la ficha
+
+    foreach ($rs as $fila) { ?>
         <tr align="center">
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["anios"] ?>       </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["kilometraje"] ?> </a></td>
             <td><a href='GarantiaFicha.php?garantiaId=<?=$fila["idGarantia"]?>'> <?= $fila["precio"] ?> €    </a></td>
             <td><input type="radio" name="garantia" value='<?=$fila["idGarantia"]?>'></td>
         </tr>
-    <?php } ?>
+    <?php }
+    } else { //Si es un usuario normal
+    foreach ($rs as $fila) { ?>
+        <tr align="center">
+            <td><p> <?= $fila["anios"] ?>       </p></td>
+            <td><p> <?= $fila["kilometraje"] ?> </p></td>
+            <td><p> <?= $fila["precio"] ?> €    </p></td>
+            <td><input type="radio" name="garantia" value='<?=$fila["idGarantia"]?>'></td>
+        </tr>
+    <?php }
+    } ?>
 
     </table>
     
@@ -62,13 +76,10 @@ if(isset($_REQUEST["motor"])){
 
 <br/><br/>
 <?php
-if(isset($_SESSION["admin"])){
-    ?>
-<<<<<<< HEAD
+if(isset($_SESSION["admin"])){ ?>
+
     <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a> 
-=======
-    <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a>
->>>>>>> main
+
 <?php } ?>
 <br/><br/>
 

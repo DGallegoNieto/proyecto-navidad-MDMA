@@ -1,6 +1,10 @@
 <?php
 require_once "_varios.php";
-if($_SESSION["cocheMarcado"]==true || $_SESSION["disenioMarcado"]==true || $_SESSION["motorMarcado"]==true || $_SESSION["garantiaMarcado"]==true){
+
+if($_SESSION["cocheMarcado"] == true ||
+    $_SESSION["disenioMarcado"] == true ||
+    $_SESSION["motorMarcado"] == true ||
+    $_SESSION["garantiaMarcado"] == true){
     
 }
 else{
@@ -40,6 +44,9 @@ $rs = $select->fetchAll();
         <th>Precio</th>
     </tr>
     <?php
+
+    if(isset($_SESSION["admin"])) { //Si hay sesión como admin muestra enlaces a la ficha
+
     foreach ($rs as $fila) { ?>
         <tr>
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["marca"] ?> </a></td>
@@ -48,7 +55,20 @@ $rs = $select->fetchAll();
             <td> <a href='CocheFicha.php?cocheId=<?=$fila["idCoche"]?>'> <?= $fila["precio"] ?> €</a></td>
             <td><input type="radio" name="coche" value='<?=$fila["idCoche"]?>'></td>
         </tr>
-    <?php } ?>
+    <?php }
+    } else { //Si es un usuario normal
+        foreach ($rs as $fila) { ?>
+            <tr>
+                <td> <p> <?= $fila["marca"] ?> </p></td>
+                <td> <p> <?= $fila["modelo"] ?> </p></td>
+                <td> <p> <?= $fila["tipo"] ?> </p></td>
+                <td> <p> <?= $fila["precio"] ?> €</p></td>
+                <td><input type="radio" name="coche" value='<?=$fila["idCoche"]?>'></td>
+            </tr>
+        <?php }
+    } ?>
+
+
 
 </table>
     

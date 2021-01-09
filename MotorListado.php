@@ -52,7 +52,11 @@
         <th>Precio</th>
 	</tr>
 
-	<?php foreach ($rs as $fila) { ?>
+	<?php
+
+    if(isset($_SESSION["admin"])){ //Si hay sesión como admin muestra enlaces a la ficha
+
+    foreach ($rs as $fila) { ?>
         <tr>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["potencia"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["combustible"] ?></a></td>
@@ -63,7 +67,21 @@
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
             <td><input type="radio" name="motor" value='<?=$fila["idMotor"]?>'> </td>
         </tr>
-	<?php } ?>
+	<?php }
+    } else { //Si es un usuario normal
+        foreach ($rs as $fila) { ?>
+            <tr>
+                <td><p> <?=$fila["potencia"] ?>         </p></td>
+                <td><p> <?=$fila["combustible"] ?>      </p></td>
+                <td><p> <?=$fila["cilindrada"] ?>       </p></td>
+                <td><p> <?=$fila["consumo"] ?>   L/100km</p></td>
+                <td><p> <?=$fila["co2"] ?>       g co2  </p></td>
+                <td><p> <?=$fila["cajaCambio"] ?>       </p></td>
+                <td><p> <?=$fila["precio"] ?>    €       </p></td>
+                <td><input type="radio" name="motor" value='<?=$fila["idMotor"]?>'> </td>
+            </tr>
+        <?php }
+    }?>
 
 </table>
 
