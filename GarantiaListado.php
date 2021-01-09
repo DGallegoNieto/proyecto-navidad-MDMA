@@ -12,7 +12,7 @@ if(isset($_REQUEST["motor"])){
     $_SESSION["facturaMotor"] = $_REQUEST["motor"];
     $_SESSION["motorMarcado"] = true;
 }else{
-    $_SESSION["motorMarcado"] = false;
+    
 }
 
 ?>

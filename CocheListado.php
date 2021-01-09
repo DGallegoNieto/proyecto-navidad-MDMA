@@ -1,10 +1,7 @@
 <?php
 require_once "_varios.php";
 
-if($_SESSION["cocheMarcado"] == true ||
-    $_SESSION["disenioMarcado"] == true ||
-    $_SESSION["motorMarcado"] == true ||
-    $_SESSION["garantiaMarcado"] == true){
+if(isset($_SESSION["cocheMarcado"])){
     
 }
 else{

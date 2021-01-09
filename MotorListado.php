@@ -17,7 +17,7 @@
         $_SESSION["facturaColor"] = $_REQUEST["color"];
         $_SESSION["disenioMarcado"]= true;    
     }else{
-        $_SESSION["disenioMarcado"]= false;
+        
     }
 ?>
 

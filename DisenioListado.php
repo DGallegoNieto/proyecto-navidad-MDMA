@@ -13,13 +13,15 @@ $selectColor = $pdo->prepare($sqlColor);
 $selectColor->execute([]);
 $rsColor = $selectColor->fetchAll();
 
+
 if(isset($_REQUEST["coche"])){
     $_SESSION["facturaCoche"] = $_REQUEST["coche"];
     $_SESSION["cocheMarcado"]= true;
     
 }else{
-    $_SESSION["cocheMarcado"]= false;   
+    
 }
+
 
 ?>
 <html>
