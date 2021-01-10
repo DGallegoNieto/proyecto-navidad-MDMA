@@ -7,7 +7,8 @@ Hemos puesto un menú para que el usuario pueda acceder de una forma más sencil
 Si estás registrado como Administrador(Admin), puedes editar estas opciones, pudiendo añadir nuevas o eliminar las existentes.
 Una vez elegidas todas las opciones y accesorios del coche, nos llevará a la factura, en la cual tendremos recogidos todos los datos del coche.
 
-Inicialmente elegimos sobre que iba a tratar el proyecto y nos asignamos unas tareas a cada uno. Al día siguiente hicimos llamada grupal y pusimos todo en común.
-A partir de ahí todos los días quedamos a una hora, poníamos todo en común y nos repartíamos el trabajo para el día siguiente.
+Inicialmente elegimos sobre que iba a tratar el proyecto y nos asignamos unas tareas a cada uno. Comenzamos haciendo la base de datos y creando la
+estructura de los PHPs, creamos el varios para meter los métodos, luego los PHPs de usuario y por último metimos las cookies.
+Todos los días quedamos a una hora, poníamos todo en común y nos repartíamos el trabajo para el día siguiente.
 
 Hemos trabajado alrededor de 23 horas aproximadamente en el proyecto cada uno aportando lo que podía en relación a sus conocimientos.
