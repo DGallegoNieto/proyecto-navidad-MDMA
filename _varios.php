@@ -80,15 +80,6 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
         return null;
     }
 }
-function esAdmin() : bool
-{
-    if(isset($_SESSION["admin"]) && $_SESSION["admin"]==true){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
 
 
 
@@ -207,4 +198,29 @@ function mostrarInfoUsuario()
         echo "<span><a href='SesionInicioMostrarFormulario.php'>Iniciar sesión</a></span>";
     }
 
+}
+
+function restablecerSeleccion(){
+    $_SESSION["cocheMarcado"] = false;
+    $_SESSION["disenioMarcado"] = false;
+    $_SESSION["motorMarcado"] = false;
+    $_SESSION["garantiaMarcado"] = false;
+    
+    if(isset($_SESSION["facturaCoche"])){
+        unset($_SESSION["facturaCoche"]);
+    }
+    
+    if(isset($_SESSION["facturaDisenio"]) && isset($_SESSION["facturaColor"])){
+        unset($_SESSION["facturaDisenio"]);
+        unset($_SESSION["facturaColor"]);
+    }
+    
+    if(isset($_SESSION["facturaMotor"])){
+        unset($_SESSION["facturaMotor"]);
+    }
+    
+    if(isset($_SESSION["facturaGarantia"])){
+        unset($_SESSION["facturaGarantia"]);
+    }
+    
 }

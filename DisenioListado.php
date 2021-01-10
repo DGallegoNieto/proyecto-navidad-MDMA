@@ -1,10 +1,6 @@
 <?php
 require_once "_varios.php";
 
- if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
-    }
-    
 $pdo = obtenerPdoConexionBD();
 
 $sql = "SELECT * FROM disenio ORDER BY idDisenio";
@@ -17,6 +13,9 @@ $selectColor = $pdo->prepare($sqlColor);
 $selectColor->execute([]);
 $rsColor = $selectColor->fetchAll();
 
+if(isset($_REQUEST["borrar"])){
+            restablecerSeleccion();   
+        }
 
 if(isset($_REQUEST["coche"])){
     $_SESSION["facturaCoche"] = $_REQUEST["coche"];
@@ -118,7 +117,7 @@ if(isset($_SESSION["admin"])){
  
     <input type="submit" value="Siguiente">
 </form>
-
+<button  onclick="location.href='DisenioListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
 <br/>
 <button onclick="location.href='CocheListado.php'">Volver</button>
 <br/>

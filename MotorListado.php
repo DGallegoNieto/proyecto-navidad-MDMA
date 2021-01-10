@@ -4,9 +4,6 @@
 //Admins puedan editar (añadir/eliminar) motores
 
 	require_once "_varios.php";
-	if(!isset($_SESSION["idUsuario"])){
-		redireccionar("Inicio.php");
-	}
 
 	$conexionBD = obtenerPdoConexionBD();
 	$sql = "SELECT idMotor, potencia, combustible, cilindrada, consumo, co2, cajaCambio, precio FROM motor ORDER BY potencia";
@@ -14,6 +11,12 @@
     $select = $conexionBD->prepare($sql);
     $select->execute([]);
     $rs = $select->fetchAll();
+    
+    if(isset($_REQUEST["borrar"])){
+        restablecerSeleccion();   
+    }
+
+
 
     if(isset($_REQUEST["disenio"]) && isset($_REQUEST["color"])){
         $_SESSION["facturaDisenio"] = $_REQUEST["disenio"];
@@ -22,6 +25,8 @@
     }else{
         
     }
+
+
 ?>
 
 
@@ -69,6 +74,7 @@
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'><?=$fila["cajaCambio"] ?></a></td>
             <td><a href='MotorFicha.php?idMotor=<?=$fila["idMotor"]?>'> <?=$fila["precio"] ?>€</a></td>
             <td><input type="radio" name="motor" value='<?=$fila["idMotor"]?>'> </td>
+            
         </tr>
 	<?php }
     } else { //Si es un usuario normal
@@ -95,6 +101,7 @@
 <a href="MotorListado.php">Motores</a><?php if($_SESSION["motorMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
 <a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
 <a href="FacturaListado.php">Factura</a><br>
+
 </div>
 
 
@@ -109,11 +116,11 @@
 
 <br />
 <br/>
-<input type="submit" value="Guardar y continuar">
+<input type="submit" value="Siguiente">
 <br />
 
 </form>
-
+<button  onclick="location.href='MotorListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
 <button onclick="location.href='DisenioListado.php'">Volver</button>
 </body>
 

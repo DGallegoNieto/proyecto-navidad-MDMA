@@ -1,27 +1,29 @@
 <?php
-require_once "_varios.php";
+    require_once "_varios.php";
 
- if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
+
+
+    if(isset($_SESSION["cocheMarcado"])){
+
+    }
+    else{
+    $_SESSION["cocheMarcado"] = false;
+    $_SESSION["disenioMarcado"] = false;
+    $_SESSION["motorMarcado"] = false;
+    $_SESSION["garantiaMarcado"] = false;
     }
 
-if(isset($_SESSION["cocheMarcado"])){
-    
-}
-else{
-$_SESSION["cocheMarcado"] = false;
-$_SESSION["disenioMarcado"] = false;
-$_SESSION["motorMarcado"] = false;
-$_SESSION["garantiaMarcado"] = false;
-}
+    $pdo = obtenerPdoConexionBD();
 
-$pdo = obtenerPdoConexionBD();
+    $sql = "SELECT * FROM coche ORDER BY idCoche";
+    $select = $pdo->prepare($sql);
+    $select->execute([]);
+    $rs = $select->fetchAll();
 
-$sql = "SELECT * FROM coche ORDER BY idCoche";
-$select = $pdo->prepare($sql);
-$select->execute([]);
-$rs = $select->fetchAll();
 
+    if(isset($_REQUEST["borrar"])){
+            restablecerSeleccion();   
+        }
 
 ?>
 <html>
@@ -94,6 +96,7 @@ if(isset($_SESSION["admin"])){
 <input type="submit" value="Siguiente">
 <br/>
 </form>
+<button  onclick="location.href='CocheListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
 <br/>
 <button onclick="location.href='Inicio.php'">Volver al inicio</button>
 </body>
