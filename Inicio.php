@@ -5,7 +5,6 @@
 //enlace Informacion coche
 //enlace Crear coche
 
-
 //Admins
 //ver facturas
 //editar coche, motor, garantia, disenio...
@@ -15,9 +14,9 @@ require_once "_varios.php";
 ?>
 <html>
 <style type="text/css">
-    div1 { position: absolute; top: 30%; left: 3%; border: 5px solid black; text-align: center; background-color: darkgrey}
-    div2 { position: absolute; top: 30%; left: 32%; border: 5px solid black; text-align: center; background-color: darkgrey}
-    div3 { position: absolute; top: 30%; left: 63%; border: 5px solid black; text-align: center; background-color: darkgrey}
+    div1 { position: absolute; top: 33%; left: 3%; border: 5px solid black; text-align: center; background-color: darkgrey}
+    div2 { position: absolute; top: 33%; left: 32%; border: 5px solid black; text-align: center; background-color: darkgrey}
+    div3 { position: absolute; top: 33%; left: 63%; border: 5px solid black; text-align: center; background-color: darkgrey}
 
 </style>
 
@@ -39,9 +38,11 @@ require_once "_varios.php";
     <p><b>DISEÑO:</b> DEPORTIVO (R-LINE)</p>
     <p><b>GARANTÍA:</b> 3 AÑOS</p>
     <p><b>MOTOR:</b> GASOLINA 150CV MANUAL</p>
-    <p><b>PRECIO: 32.500€</b> </p>
+    <p><b>PRECIO: 33.405€</b> </p>
     <img src="imagenes/volkswagen.jfif" width="248px">
     </br></br>
+    <button onclick="location.href=''">COMPRAR</button>
+    </br>
 </div1>
 
 <div2>
@@ -50,10 +51,12 @@ require_once "_varios.php";
     <p><b>COLOR:</b> ROJO</p>
     <p><b>DISEÑO:</b> INTERMEDIO (AMBITION)</p>
     <p><b>GARANTÍA:</b> 4 AÑOS</p>
-    <p><b>MOTOR:</b> DIESEL 190CV AUTOMÁTICO</p>
-    <p><b>PRECIO: 28.900€</b> </p>
+    <p><b>MOTOR:</b> DIESEL 170CV AUTOMÁTICO</p>
+    <p><b>PRECIO: 42.135€</b> </p>
     <img src="imagenes/audiA4.jfif" width="301px">
     </br></br>
+    <button onclick="location.href=''">COMPRAR</button>
+    </br>
 </div2>
 
 <div3>
@@ -63,9 +66,11 @@ require_once "_varios.php";
     <p><b>DISEÑO:</b> BASE (ACTIVE)</p>
     <p><b>GARANTÍA:</b> 3 AÑOS</p>
     <p><b>MOTOR:</b> DIESEL 150CV MANUAL</p>
-    <p><b>PRECIO: 19.500€</b> </p>
+    <p><b>PRECIO: 24.405€</b> </p>
     <img src="imagenes/seatCordoba.jfif" width="228px">
     </br></br>
+    <button onclick="location.href=''">COMPRAR</button>
+    </br>
 </div3>
 
 </html>
