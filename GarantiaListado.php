@@ -1,24 +1,27 @@
 <?php
-    require_once "_varios.php";
+require_once "_varios.php";
 
-    $pdo = obtenerPdoConexionBD();
+ if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+    }
+    
+$pdo = obtenerPdoConexionBD();
 
-    $sql = "SELECT * FROM garantia ORDER BY idGarantia";
-    $select = $pdo->prepare($sql);
-    $select->execute([]);
-    $rs = $select->fetchAll();
+$sql = "SELECT * FROM garantia ORDER BY idGarantia";
+$select = $pdo->prepare($sql);
+$select->execute([]);
+$rs = $select->fetchAll();
 
-    if(isset($_REQUEST["borrar"])){
+if(isset($_REQUEST["borrar"])){
                 restablecerSeleccion();   
             }
 
-
-    if(isset($_REQUEST["motor"])){
-        $_SESSION["facturaMotor"] = $_REQUEST["motor"];
-        $_SESSION["motorMarcado"] = true;
-    }else{
-
-    }
+if(isset($_REQUEST["motor"])){
+    $_SESSION["facturaMotor"] = $_REQUEST["motor"];
+    $_SESSION["motorMarcado"] = true;
+}else{
+    
+}
 
 ?>
 
@@ -92,8 +95,8 @@ if(isset($_SESSION["admin"])){ ?>
 <input type="submit" value="Ver factura">
 <br/>
 </form>
-<button  onclick="location.href='GarantiaListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
 <button onclick="location.href='MotorListado.php'">Volver</button>
+<button  onclick="location.href='GarantiaListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
 </body>
 
 </html>

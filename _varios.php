@@ -80,6 +80,15 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
         return null;
     }
 }
+function esAdmin() : bool
+{
+    if(isset($_SESSION["admin"]) && $_SESSION["admin"]==true){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 
 
@@ -224,3 +233,4 @@ function restablecerSeleccion(){
     }
     
 }
+

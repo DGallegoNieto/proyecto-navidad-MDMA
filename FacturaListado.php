@@ -2,22 +2,50 @@
 
 require_once "_varios.php";
 
+ if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+ }
+    
 $conexionBD = obtenerPdoConexionBD();
 
-if(isset($_REQUEST["garantia"])) {
+
+if(isset($_REQUEST["idFactura"])){
+    $sqlFactura = "SELECT * FROM factura WHERE idFactura=?";
+    $selectFactura = $conexionBD->prepare($sqlFactura);
+    $selectFactura->execute([$_REQUEST["idFactura"]]);
+    $rsFactura = $selectFactura->fetchAll();
+
+    $_SESSION["facturaCoche"] = $rsFactura[0]["idCoche"];
+    $_SESSION["facturaMotor"] = $rsFactura[0]["idMotor"];
+    $_SESSION["facturaDisenio"] = $rsFactura[0]["idDisenio"];
+    $_SESSION["facturaGarantia"] = $rsFactura[0]["idGarantia"];
+    $_SESSION["facturaColor"] = $rsFactura[0]["idColor"];
+
+
+    $_SESSION["cocheMarcado"] = true;
+    $_SESSION["disenioMarcado"] = true;
+    $_SESSION["motorMarcado"] = true;
+    $_SESSION["garantiaMarcado"] = true;
+    $todoMarcado = true;
+}
+
+if(isset($_REQUEST["borrar"])){
+            restablecerSeleccion();   
+        }
+
+if(isset($_REQUEST["garantia"])) { //Recoge datos de Garantía
     $_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
     $_SESSION["garantiaMarcado"] = true;
 }
 
+//Control de si están todos los campos seleccionados
 if(isset($_SESSION["facturaCoche"]) && isset($_SESSION["facturaDisenio"]) && isset($_SESSION["facturaMotor"]) && isset($_SESSION["facturaGarantia"])){
     $todoMarcado = true;
 } else {
     $todoMarcado = false;
 }
 
-if(isset($_REQUEST["borrar"])){
-            restablecerSeleccion();   
-        }
+
 
 
 if($todoMarcado) { //Si están todos los apartados seleccionados
@@ -35,7 +63,7 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
     $rsDisenio = $selectDisenio->fetchAll();
 
 
-//SQL de Color ---------?????
+//SQL de Color
     $sqlColor = "SELECT * FROM color WHERE idColor=?";
     $selectColor = $conexionBD->prepare($sqlColor);
     $selectColor->execute([$_SESSION["facturaColor"]]);
@@ -105,8 +133,8 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
 
 
     </table>
-
-    <div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+        
+    <div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: #a9a9a9; border-radius:20px; ">
         <a href="Inicio.php">Inicio</a><br>
         <a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
         <a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
@@ -114,7 +142,7 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         <a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
         <a href="FacturaListado.php">Factura</a><br>
     </div>
-
+    <button  onclick="location.href='CocheListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
     <h2>Diseño:</h2>
     <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
@@ -252,7 +280,7 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         } ?>
 
     </table>
-    <button  onclick="location.href='CocheListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
+
     <h2>Precio final: <?=$precioFinal?> €</h2>
 
     <?php $_SESSION["precioFinal"] = $precioFinal ?>
