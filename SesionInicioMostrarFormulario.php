@@ -14,7 +14,7 @@
     <form action="SesionInicioComprobar.php" method="post">
         <label>Usuario</label> <input type="text" name="usuario">
         <br />
-        <label>Contraseña</label> <input type="text" name="contrasenna">
+        <label>Contraseña</label> <input type="password" name="contrasenna">
         <br />
         <label for="recordar">Recuérdame: </label><input type="checkbox" name="recordar">
         <br />

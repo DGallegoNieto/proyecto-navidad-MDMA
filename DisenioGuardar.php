@@ -25,7 +25,7 @@
 
     } else {
 
-        $sql = "UPDATE disenio SET acabado=?, llantas=?, asientos=?, parrilla=?, precio=? WHERE idCoche=?";
+        $sql = "UPDATE disenio SET acabado=?, llantas=?, asientos=?, parrilla=?, precio=? WHERE idDisenio=?";
         $parametros = [$acabadoDisenio, $llantasDisenio, $asientosDisenio, $parrillaDisenio, $precioDisenio, $_SESSION["disenioId"]];
     }
 

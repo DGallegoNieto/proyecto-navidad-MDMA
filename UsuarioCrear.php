@@ -19,10 +19,10 @@
 	<input type="text" name="usuario">
 	<br>
 	<label>Contraseña</label>
-	<input type="text" name="contrasenia">
+	<input type="password" name="contrasenia">
 	<br>
 	<label>Repite la contraseña</label>
-	<input type="text" name="contraseniaC">
+	<input type="password" name="contraseniaC">
 	<br>
 	<label>Nombre</label>
 	<input type="text" name="nombre">

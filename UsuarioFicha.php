@@ -42,12 +42,12 @@ $usuarioUsuario = $rs[0]["usuario"];
         </li>
          <li>
             <strong>Cambiar Contraseña: </strong>
-            <input type="text" name="contrasenia">
+            <input type="password" name="contrasenia">
         </li>
 
         <li>
             <strong>Confirmar Cambio Contraseña: </strong>
-            <input type="text" name="contraseniaC">
+            <input type="password" name="contraseniaC">
         </li>
 
     </ul>

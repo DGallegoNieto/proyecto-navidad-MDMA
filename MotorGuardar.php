@@ -8,7 +8,7 @@
 	
 	$conexionBD = obtenerPdoConexionBD();
 
-	$idMotor = (int)$_REQUEST["idMotor"];
+	
 	$potencia = $_REQUEST["potencia"];
     $combustible = $_REQUEST["combustible"];
     $cilindrada = $_REQUEST["cilindrada"];
@@ -17,14 +17,14 @@
     $cajaCambio = $_REQUEST["cajaCambio"];
     $precio = $_REQUEST["precio"];
 
-	$nuevaEntrada = ($idMotor == -1);
+	$nuevaEntrada = ($_SESSION["motorId"] == -1);
 	
 	if ($nuevaEntrada) {
  		$sql = "INSERT INTO motor (potencia, combustible, cilindrada, consumo, co2, cajaCambio, precio) VALUES (?, ?, ?, ?, ?, ?, ?)";
  		$parametros = [$potencia, $combustible, $cilindrada, $consumo, $co2, $cajaCambio, $precio];
 	} else {
  		$sql = "UPDATE motor SET potencia=?, combustible =?, cilindrada =?, consumo =?, co2=?, cajaCambio=?,precio=? WHERE idMotor=?";
-        $parametros = [$potencia, $combustible, $cilindrada, $consumo, $co2, $cajaCambio, $precio, $idMotor];
+        $parametros = [$potencia, $combustible, $cilindrada, $consumo, $co2, $cajaCambio, $precio, $_SESSION["motorId"]];
  	}
  	
     $sentencia = $conexionBD->prepare($sql);

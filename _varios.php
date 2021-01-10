@@ -202,6 +202,9 @@ function intentarCanjearSesionCookie(): bool
             $_SESSION["apellido"] = $usuario[0]["apellido"];
             $_SESSION["codigoCookie"] = $usuario[0]["codigoCookie"];
             $_SESSION["tipo"] = $usuario[0]["tipo"];
+            if($_SESSION["tipo"]=="Admin"){
+                $_SESSION["admin"]="true";
+            }
             return true;
         } else {
             return false;
