@@ -41,7 +41,9 @@ require_once "_varios.php";
     <p><b>PRECIO: 33.405€</b> </p>
     <img src="imagenes/volkswagen.jfif" width="248px">
     </br></br>
-    <button onclick="location.href=''">COMPRAR</button>
+    <?php if(haySesionIniciada()){ ?>
+        <button onclick="location.href='FacturaListado.php?idFactura=13'">COMPRAR</button>
+    <?php } ?>
     </br>
 </div1>
 
@@ -55,7 +57,9 @@ require_once "_varios.php";
     <p><b>PRECIO: 42.135€</b> </p>
     <img src="imagenes/audiA4.jfif" width="301px">
     </br></br>
-    <button onclick="location.href=''">COMPRAR</button>
+    <?php if(haySesionIniciada()){ ?>
+        <button onclick="location.href='FacturaListado.php?idFactura=14'">COMPRAR</button>
+    <?php } ?>
     </br>
 </div2>
 
@@ -69,7 +73,10 @@ require_once "_varios.php";
     <p><b>PRECIO: 24.405€</b> </p>
     <img src="imagenes/seatCordoba.jfif" width="228px">
     </br></br>
-    <button onclick="location.href=''">COMPRAR</button>
+    <?php if(haySesionIniciada()){ ?>
+        <button onclick="location.href='FacturaListado.php?idFactura=15'">COMPRAR</button>
+    <?php } ?>
+
     </br>
 </div3>
 
