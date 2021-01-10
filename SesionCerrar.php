@@ -1,16 +1,15 @@
 <?php
 
+    require_once "_Varios.php";
 
-require_once "_Varios.php";
-
-if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
+    if(!haySesionIniciada()){
+            redireccionar("Inicio.php");
     }
 
-cerrarSesion();
-borrarCookieRecordar();
+    cerrarSesion();
+    borrarCookieRecordar();
 
-redireccionar("Inicio.php");
+    redireccionar("Inicio.php");
 
 
 

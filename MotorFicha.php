@@ -1,16 +1,17 @@
 <?php
 	require_once "_varios.php";
 
-    if(!esAdmin()){
-    redireccionar("Inicio.php");
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
     }
 
 	$conexion = obtenerPdoConexionBD();
-	$idMotor = (int)$_REQUEST["idMotor"];
-	$nuevaEntrada = ($idMotor == -1);
+
+	$_SESSION["motorId"] = (int)$_REQUEST["motorId"];
+
+	$nuevaEntrada = ($_SESSION["motorId"] == -1);
 
 	if ($nuevaEntrada) {
-		
         $potenciaMotor = " ";
         $combustibleMotor = " ";
         $cilindradaMotor = " ";
@@ -18,13 +19,12 @@
         $co2Motor = " ";
         $cajaCambioMotor = " ";
         $precioMotor = " ";
-        
-        
+
 	} else {
 		$sql = "SELECT potencia, combustible, cilindrada, consumo, co2, cajaCambio, precio FROM motor WHERE idMotor=?";
 
         $select = $conexion->prepare($sql);
-        $select->execute([$idMotor]);
+        $select->execute([$_SESSION["motorId"]]);
         $rs = $select->fetchAll();
         
         $potenciaMotor = $rs[0]["potencia"];
@@ -39,11 +39,10 @@
 	}
 
 
-
     $sql = "SELECT * FROM motor WHERE idMotor=? ORDER BY potencia";
 
     $select = $conexion->prepare($sql);
-    $select->execute([$idMotor]);
+    $select->execute([$_SESSION["motorId"]]);
     $rsMotores = $select->fetchAll();
 ?>
 
@@ -62,12 +61,10 @@
 <?php if ($nuevaEntrada) { ?>
 	<h1>Ficha de nuevo Motor</h1>
 <?php } else { ?>
-	<h1>Ficha tecnica del motor</h1>
+	<h1>Ficha técnica del motor</h1>
 <?php } ?>
 
 <form method='get' action='MotorGuardar.php'>
-
-<input type='hidden' name='idMotor' value='<?=$idMotor?>' />
 
     <ul>
         <li>
@@ -114,9 +111,14 @@
 <?php } ?>
 
 </form>
+
 <button onclick="location.href='MotorListado.php'">Volver</button>
-<br /><br />
+
+<br />
+<br />
+
 <a href="MotorEliminar.php?id=<?=$_SESSION["motorId"]?>">Eliminar</a>
+
 </body>
 
 </html>

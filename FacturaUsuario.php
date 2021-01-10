@@ -1,19 +1,21 @@
 <?php
-require_once "_varios.php";
 
-if(!haySesionIniciada()){
+    require_once "_varios.php";
+
+    if(!haySesionIniciada()){ //Si no hay sesión iniciada, redirige al inicio
         redireccionar("Inicio.php");
     }
-    
-$pdo = obtenerPdoConexionBD();
 
-$sql = "SELECT * FROM factura WHERE idUsuario=? ORDER BY fecha";
-$select = $pdo->prepare($sql);
-$select->execute([$_SESSION["idUsuario"]]);
-$rs = $select->fetchAll();
+    $pdo = obtenerPdoConexionBD();
 
+    //Consulta SQL
+    $sql = "SELECT * FROM factura WHERE idUsuario=? ORDER BY fecha";
+    $select = $pdo->prepare($sql);
+    $select->execute([$_SESSION["idUsuario"]]);
+    $rs = $select->fetchAll();
 
 ?>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -36,6 +38,7 @@ $rs = $select->fetchAll();
             <th>IdGarantía</th>
             <th>IdColor</th>
             <th>Precio</th>
+            <th>Detalles</th>
         </tr>
         <?php
         foreach ($rs as $fila) { ?>
@@ -48,6 +51,8 @@ $rs = $select->fetchAll();
                 <td> <p> <?= $fila["idGarantia"] ?></p></td>
                 <td> <p> <?= $fila["idColor"] ?></p></td>
                 <td> <p> <?= $fila["precioFinal"] ?>€</p></td>
+                <td> <a href="FacturaListado.php?idFactura=<?=$fila["idFactura"]?>">Ver detalles </a></td>
+
 
             </tr>
         <?php } ?>

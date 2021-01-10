@@ -1,26 +1,27 @@
 <?php
-require_once "_varios.php";
-if(!esAdmin()){
-	redireccionar("Inicio.php");
-}
-$conexion = obtenerPdoConexionBD();
+
+    require_once "_varios.php";
+
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
+
+    $conexion = obtenerPdoConexionBD();
+
+    //Consulta SQL
+    $sql = "DELETE FROM coche WHERE idCoche=?";
+    $sentencia = $conexion->prepare($sql);
+    $sqlConExito = $sentencia->execute([$_SESSION["cocheId"]]);
 
 
-$sql = "DELETE FROM coche WHERE idCoche=?";
-
-$sentencia = $conexion->prepare($sql);
-
-$sqlConExito = $sentencia->execute([$_SESSION["cocheId"]]);
+    $unaFilaAfectada = ($sentencia->rowCount() == 1);
+    $ningunaFilaAfectada = ($sentencia->rowCount() == 0);
 
 
-$unaFilaAfectada = ($sentencia->rowCount() == 1);
-$ningunaFilaAfectada = ($sentencia->rowCount() == 0);
+    $correcto = ($sqlConExito && $unaFilaAfectada);
 
 
-$correcto = ($sqlConExito && $unaFilaAfectada);
-
-
-$noExistia = ($sqlConExito && $ningunaFilaAfectada);
+    $noExistia = ($sqlConExito && $ningunaFilaAfectada);
 ?>
 
 

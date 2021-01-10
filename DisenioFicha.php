@@ -1,36 +1,36 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-if(!esAdmin()){
-    redireccionar("Inicio.php");
-}
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$pdo = obtenerPdoConexionBD();
+    $pdo = obtenerPdoConexionBD();
 
-$_SESSION["disenioId"] = (int)$_REQUEST["disenioId"];
+    $_SESSION["disenioId"] = (int)$_REQUEST["disenioId"];
 
-$nuevaEntrada = ($_SESSION["disenioId"] == -1);
+    $nuevaEntrada = ($_SESSION["disenioId"] == -1);
 
-if($nuevaEntrada){
-    $acabadoDisenio = " ";
-    $llantasDisenio = " ";
-    $asientosDisenio = " ";
-    $parrillaDisenio = " ";
-    $precioDisenio = " ";
-}else{
+    if($nuevaEntrada){
+        $acabadoDisenio = " ";
+        $llantasDisenio = " ";
+        $asientosDisenio = " ";
+        $parrillaDisenio = " ";
+        $precioDisenio = " ";
+    }else{
 
-    $sql = "SELECT acabado, llantas, asientos, parrilla, precio FROM disenio WHERE idDisenio=?";
-    $select = $pdo->prepare($sql);
-    $select->execute([$_SESSION["disenioId"]]);
-    $rs = $select->fetchAll();
+        $sql = "SELECT acabado, llantas, asientos, parrilla, precio FROM disenio WHERE idDisenio=?";
+        $select = $pdo->prepare($sql);
+        $select->execute([$_SESSION["disenioId"]]);
+        $rs = $select->fetchAll();
 
-    $acabadoDisenio = $rs[0]["acabado"];
-    $llantasDisenio = $rs[0]["llantas"];
-    $asientosDisenio = $rs[0]["asientos"];
-    $parrillaDisenio = $rs[0]["parrilla"];
-    $precioDisenio = $rs[0]["precio"];
-}
+        $acabadoDisenio = $rs[0]["acabado"];
+        $llantasDisenio = $rs[0]["llantas"];
+        $asientosDisenio = $rs[0]["asientos"];
+        $parrillaDisenio = $rs[0]["parrilla"];
+        $precioDisenio = $rs[0]["precio"];
+    }
 
 ?>
 <html>

@@ -1,46 +1,46 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-if(!esAdmin()){
-    redireccionar("Inicio.php");
-}
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$pdo = obtenerPdoConexionBD();
-
-//$_SESSION["cocheId"]
-
-$marcaCoche = $_REQUEST["marca"];
-$modeloCoche = $_REQUEST["modelo"];
-$tipoCoche = $_REQUEST["tipo"];
-$precioCoche = $_REQUEST["precio"];
+    $pdo = obtenerPdoConexionBD();
 
 
-
-$nueva_entrada = ($_SESSION["cocheId"] == -1);
-
-if ($nueva_entrada) {
-
-    $sql = "INSERT INTO coche (marca, modelo, tipo, precio) VALUES (?, ?, ?, ?)";
-    $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche];
-
-} else {
-
-    $sql = "UPDATE coche SET marca=?, modelo=?, tipo=?, precio=? WHERE idCoche=?";
-    $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche, $_SESSION["cocheId"]];
-}
-
-$sentencia = $pdo->prepare($sql);
-$sql_con_exito = $sentencia->execute($parametros);
+    $marcaCoche = $_REQUEST["marca"];
+    $modeloCoche = $_REQUEST["modelo"];
+    $tipoCoche = $_REQUEST["tipo"];
+    $precioCoche = $_REQUEST["precio"];
 
 
-$una_fila_afectada = ($sentencia->rowCount() == 1);
-$ninguna_fila_afectada = ($sentencia->rowCount() == 0);
+
+    $nueva_entrada = ($_SESSION["cocheId"] == -1);
+
+    if ($nueva_entrada) {
+
+        $sql = "INSERT INTO coche (marca, modelo, tipo, precio) VALUES (?, ?, ?, ?)";
+        $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche];
+
+    } else {
+
+        $sql = "UPDATE coche SET marca=?, modelo=?, tipo=?, precio=? WHERE idCoche=?";
+        $parametros = [$marcaCoche, $modeloCoche, $tipoCoche, $precioCoche, $_SESSION["cocheId"]];
+    }
+
+    $sentencia = $pdo->prepare($sql);
+    $sql_con_exito = $sentencia->execute($parametros);
 
 
-$correcto = ($sql_con_exito && $una_fila_afectada);
+    $una_fila_afectada = ($sentencia->rowCount() == 1);
+    $ninguna_fila_afectada = ($sentencia->rowCount() == 0);
 
-$datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
+
+    $correcto = ($sql_con_exito && $una_fila_afectada);
+
+    $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
+
 ?>
 
 

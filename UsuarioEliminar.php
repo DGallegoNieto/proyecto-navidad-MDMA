@@ -1,28 +1,26 @@
 <?php
-require_once "_varios.php";
+    require_once "_varios.php";
 
-$conexion = obtenerPdoConexionBD();
+    $conexion = obtenerPdoConexionBD();
 
-if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
+    if(!haySesionIniciada()){ //Si no hay sesión iniciada redirige al inicio
+            redireccionar("Inicio.php");
     }
-    
 
-$sql = "DELETE FROM usuario WHERE idUsuario=?";
-
-$sentencia = $conexion->prepare($sql);
-
-$sqlConExito = $sentencia->execute([$_SESSION["idUsuario"]]);
+    //Consulta SQL
+    $sql = "DELETE FROM usuario WHERE idUsuario=?";
+    $sentencia = $conexion->prepare($sql);
+    $sqlConExito = $sentencia->execute([$_SESSION["idUsuario"]]);
 
 
-$unaFilaAfectada = ($sentencia->rowCount() == 1);
-$ningunaFilaAfectada = ($sentencia->rowCount() == 0);
+    $unaFilaAfectada = ($sentencia->rowCount() == 1);
+    $ningunaFilaAfectada = ($sentencia->rowCount() == 0);
 
 
-$correcto = ($sqlConExito && $unaFilaAfectada);
+    $correcto = ($sqlConExito && $unaFilaAfectada);
 
 
-$noExistia = ($sqlConExito && $ningunaFilaAfectada);
+    $noExistia = ($sqlConExito && $ningunaFilaAfectada);
 ?>
 
 

@@ -1,27 +1,28 @@
 <?php
-require_once "_varios.php";
+    require_once "_varios.php";
 
- if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
+     if(!haySesionIniciada()){ //Si no hay sesión iniciada, redirige al inicio
+            redireccionar("Inicio.php");
+     }
+
+
+    if(hayCookieValida()) { //Canjea cookie si ha marcado el checkbox de recuerdame y accede directamente a GarantiaListado
+        $cookieCanjeada = intentarCanjearSesionCookie();
     }
-    
-$pdo = obtenerPdoConexionBD();
 
-$sql = "SELECT * FROM garantia ORDER BY idGarantia";
-$select = $pdo->prepare($sql);
-$select->execute([]);
-$rs = $select->fetchAll();
+    $pdo = obtenerPdoConexionBD();
 
-if(isset($_REQUEST["borrar"])){
-                restablecerSeleccion();   
-            }
+    //Consulta SQL
+    $sql = "SELECT * FROM garantia ORDER BY idGarantia";
+    $select = $pdo->prepare($sql);
+    $select->execute([]);
+    $rs = $select->fetchAll();
 
-if(isset($_REQUEST["motor"])){
-    $_SESSION["facturaMotor"] = $_REQUEST["motor"];
-    $_SESSION["motorMarcado"] = true;
-}else{
-    
-}
+
+    if(isset($_REQUEST["motor"])){ //Recoge los datos seleccionados en Motor y lo marca
+        $_SESSION["facturaMotor"] = $_REQUEST["motor"];
+        $_SESSION["motorMarcado"] = true;
+    }
 
 ?>
 
@@ -33,9 +34,10 @@ if(isset($_REQUEST["motor"])){
 
 <body>
 
-<h1>Listado de Garantías</h1>
+<h1>Garantías</h1>
 
 <?=mostrarInfoUsuario()?>
+
 <br />
 <br />
 
@@ -72,31 +74,34 @@ if(isset($_REQUEST["motor"])){
     } ?>
 
     </table>
-    
-<div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
-<a href="Inicio.php">Inicio</a><br>    
-<a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
-<a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
-<a href="MotorListado.php">Motores</a><?php if($_SESSION["motorMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
-<a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
-<a href="FacturaListado.php">Factura</a><br>
-</div>    
 
-<br/><br/>
-<?php
-if(isset($_SESSION["admin"])){ ?>
+    <!-- Menú de navegación -->
+    <div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: darkgrey; border-radius:20px; ">
+        <a href="Inicio.php">Inicio</a><br>
+        <a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+        <a href="DisenioListado.php">Diseños</a><?php if($_SESSION["disenioMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+        <a href="MotorListado.php">Motores</a><?php if($_SESSION["motorMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+        <a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
+        <a href="FacturaListado.php">Factura</a><br>
+    </div>
 
-    <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a> 
+    <br/>
 
-<?php } ?>
-<br/><br/>
+    <?php if(isset($_SESSION["admin"])){ //Permite crear una nueva entrada si ha iniciado sesión como administrador ?>
+        <a href="GarantiaFicha.php?garantiaId=-1">Nueva entrada</a>
+    <?php } ?>
 
-<br/>
-<input type="submit" value="Ver factura">
-<br/>
+    <br/>
+    <br/>
+
+    <input type="submit" value="Ver factura">
+
+    <br/>
+
 </form>
+
 <button onclick="location.href='MotorListado.php'">Volver</button>
-<button  onclick="location.href='GarantiaListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
+
 </body>
 
 </html>

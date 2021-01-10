@@ -1,24 +1,26 @@
 <?php
-require_once "_varios.php";
 
-if(!esAdmin()){
-	redireccionar("Inicio.php");
-}
+    require_once "_varios.php";
 
-$conexion = obtenerPdoConexionBD();
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$sql = "DELETE FROM garantia WHERE idGarantia=?";
+    $conexion = obtenerPdoConexionBD();
 
-$sentencia = $conexion->prepare($sql);
+    //Consulta SQL
+    $sql = "DELETE FROM garantia WHERE idGarantia=?";
+    $sentencia = $conexion->prepare($sql);
+    $sqlConExito = $sentencia->execute([$_SESSION["garantiaId"]]);
 
-$sqlConExito = $sentencia->execute([$_SESSION["garantiaId"]]);
 
-$unaFilaAfectada = ($sentencia->rowCount() == 1);
-$ningunaFilaAfectada = ($sentencia->rowCount() == 0);
+    $unaFilaAfectada = ($sentencia->rowCount() == 1);
+    $ningunaFilaAfectada = ($sentencia->rowCount() == 0);
 
-$correcto = ($sqlConExito && $unaFilaAfectada);
 
-$noExistia = ($sqlConExito && $ningunaFilaAfectada);
+    $correcto = ($sqlConExito && $unaFilaAfectada);
+
+    $noExistia = ($sqlConExito && $ningunaFilaAfectada);
 ?>
 
 <html>

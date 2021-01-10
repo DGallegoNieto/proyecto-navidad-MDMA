@@ -1,16 +1,17 @@
 <?php
+
 	require_once "_varios.php";
 
-	if(!esAdmin()){
-	redireccionar("Inicio.php");
-}
+	if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+	    redireccionar("Inicio.php");
+    }
 
 	$conexionBD = obtenerPdoConexionBD();
-	$idMotor = (int)$_REQUEST["idMotor"];
-    $sql = "DELETE FROM motor WHERE idMotor=?";
 
+    //Consulta SQL
+    $sql = "DELETE FROM motor WHERE idMotor=?";
     $sentencia = $conexionBD->prepare($sql);
-    $sqlConExito = $sentencia->execute([$idMotor]);
+    $sqlConExito = $sentencia->execute([$_SESSION["motorId"]]);
 
     $correctoNormal = ($sqlConExito && $sentencia->rowCount() == 1);
 

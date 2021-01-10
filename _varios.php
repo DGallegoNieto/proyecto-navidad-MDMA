@@ -36,7 +36,8 @@ function syso(string $contenido)
     file_put_contents('php://stderr', $contenido . "\n");
 }
 
-// funciones para crear un usuario y comprobar si existe el usuario que se va a crear (Alex)
+//INICIO DE SESIÓN
+//Funciones para crear un usuario y comprobar si existe el usuario que se va a crear (Alex)
 function comprobarUsuario(string $usuario): bool
 {
     $conexionBD= obtenerPdoConexionBD();
@@ -52,6 +53,7 @@ function comprobarUsuario(string $usuario): bool
     }
 
 }
+
 function crearUsuario(string $usuario,string $contrasenna,string $nombre,string $apellido)
 {
     $conexionBD= obtenerPdoConexionBD();
@@ -80,6 +82,7 @@ function obtenerUsuario(string $usuario, string $contrasenna): ?array
         return null;
     }
 }
+
 function esAdmin() : bool
 {
     if(isset($_SESSION["admin"]) && $_SESSION["admin"]==true){
@@ -92,7 +95,7 @@ function esAdmin() : bool
 
 
 
-	function marcarSesionComoIniciada(array $arrayUsuario, bool $admin)
+function marcarSesionComoIniciada(array $arrayUsuario, bool $admin)
 {
 	$_SESSION["idUsuario"]= $arrayUsuario['idUsuario'];
 	$_SESSION["usuario"]= $arrayUsuario['usuario'];
@@ -103,6 +106,7 @@ function esAdmin() : bool
 	}
 	
 }
+
 function comprobarAdmin(array $arrayUsuario): bool
 {
     if ($arrayUsuario['tipo'] == "Admin") {
@@ -119,7 +123,17 @@ function cerrarSesion()
 
 }
 
+function haySesionIniciada(): bool
+{
+    if(isset($_SESSION["idUsuario"])){
+        return true;
+    } else{
+        return false;
+    }
+}
 
+//COOKIES
+//Función que genera cookies de php
 function generarCookieRecordar(array $arrayUsuario)
 {
     $pdo = obtenerPdoConexionBD();
@@ -129,12 +143,13 @@ function generarCookieRecordar(array $arrayUsuario)
     setcookie("codigoCookie", $codigoCookie, time()+60*60*24);
     setcookie("usuarioCookie", $arrayUsuario["usuario"], time()+60*60*24);
 
-    $sql = "UPDATE usuario SET codigoCookie=? WHERE id=?";
+    $sql = "UPDATE usuario SET codigoCookie=? WHERE idUsuario=?";
     $sentencia = $pdo ->prepare($sql);
     $sentencia->execute([$codigoCookie, $arrayUsuario["idUsuario"]]);
    
 }
 
+//Genera una cadena aleatoria como cookie
 function generarCadenaAleatoria(int $longitud): string
 {
     for ($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $longitud; $x = rand(0,$z), $s .= $a[$x], $i++);
@@ -143,12 +158,18 @@ function generarCadenaAleatoria(int $longitud): string
 
 function borrarCookieRecordar()
 {
-    //TODO borrar cookie BD
+    $pdo = obtenerPdoConexionBD();
+
+    $sql = "UPDATE usuario SET codigoCookie=NULL WHERE idUsuario=?";
+    $sentencia = $pdo ->prepare($sql);
+    $sentencia->execute([$_SESSION["idUsuario"]]);
+
     setcookie("codigoCookie", "", time()-60*60*24);
     setcookie("usuarioCookie", "", time()-60*60*24);
 
 }
 
+//Funcion que devuelve true/false si viene una cookie
 function hayCookieValida()
 {
     if(isset($_COOKIE["codigoCookie"])){
@@ -158,6 +179,7 @@ function hayCookieValida()
     }
 }
 
+//Función que "Canjea" la cookie que viene y establece la sesión correspondiente
 function intentarCanjearSesionCookie(): bool
 {
 
@@ -190,15 +212,9 @@ function intentarCanjearSesionCookie(): bool
     }
 }
 
-function haySesionIniciada(): bool
-{
-    if(isset($_SESSION["idUsuario"])){
-        return true;
-    } else{
-        return false;
-    }
-}
 
+
+//Función que muestra la información del usuario, con acceso a la ficha y cerrar sesión
 function mostrarInfoUsuario()
 {
     if(haySesionIniciada()){
@@ -209,7 +225,10 @@ function mostrarInfoUsuario()
 
 }
 
-function restablecerSeleccion(){
+//Función para restablecer los datos y sesiones del menú
+function restablecerSeleccion()
+{
+
     $_SESSION["cocheMarcado"] = false;
     $_SESSION["disenioMarcado"] = false;
     $_SESSION["motorMarcado"] = false;

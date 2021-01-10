@@ -1,43 +1,39 @@
 <?php
 
-require_once"_Varios.php";
+    require_once"_Varios.php";
 
-$usuario = $_REQUEST['usuario'];
-$contrasenna = $_REQUEST['contrasenna'];
+    //Recoge usuario y contraseña
+    $usuario = $_REQUEST['usuario'];
+    $contrasenna = $_REQUEST['contrasenna'];
 
+    //Obtiene un usuario en forma de array a partir de un usuario y contraseña
+    $arrayUsuario = obtenerUsuario($usuario, $contrasenna);
 
-$arrayUsuario = obtenerUsuario($usuario, $contrasenna);
-
-if($arrayUsuario ==null){
-		redireccionar("SesionInicioMostrarFormulario.php?error");}
-if(comprobarAdmin($arrayUsuario)){
-	$admin = true;
-} else{
-    $admin = false;
-}
-echo $admin;
-
-
-if ($arrayUsuario != null) { 
-	marcarSesionComoIniciada($arrayUsuario, $admin);
-    redireccionar("Inicio.php");
-	
-}
-
-//----------------
-
-if ($arrayUsuario["contrasenna"] == $contrasenna) { // HAN venido datos: identificador existía y contraseña era correcta.
-
-    if(isset($_REQUEST["recordar"])){
-        generarCookieRecordar($arrayUsuario);
+    if($arrayUsuario == null){ //Si no encuentra el usuario devolverá null, por lo que redirecciona con un error
+            redireccionar("SesionInicioMostrarFormulario.php?error");
     }
 
-    marcarSesionComoIniciada($arrayUsuario);
-    redireccionar("Inicio.php");
 
-} else {
+    //Comprueba si el usuario es un administrador y asigna true o false
+    if(comprobarAdmin($arrayUsuario)) {
+        $admin = true;
+    } else {
+        $admin = false;
+    }
 
-    redireccionar("SesionInicioMostrarFormulario.php?error");
-}
+    //Si ha habido exito y devuelve un usuario no nulo mara su sesión como iniciada
+    if ($arrayUsuario != null) {
+        marcarSesionComoIniciada($arrayUsuario, $admin);
+
+        if(isset($_REQUEST["recordar"])){ //Si viene el checkbox "recordar" y hay un usuario, se generará una cookie
+            generarCookieRecordar($arrayUsuario);
+        }
+
+        redireccionar("Inicio.php");
+
+    } else {
+
+        redireccionar("SesionInicioMostrarFormulario.php?error");
+    }
 
 

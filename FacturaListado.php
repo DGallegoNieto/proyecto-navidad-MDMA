@@ -1,88 +1,93 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
- if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
- }
-    
-$conexionBD = obtenerPdoConexionBD();
+     if(!haySesionIniciada()){ //Si no hay sesión iniciada, redirige al inicio
+            redireccionar("Inicio.php");
+     }
 
+    if(hayCookieValida()) { //Canjea cookie si ha marcado el checkbox de recuerdame y accede directamente a FacturaListado
+        $cookieCanjeada = intentarCanjearSesionCookie();
+    }
 
-if(isset($_REQUEST["idFactura"])){
-    $sqlFactura = "SELECT * FROM factura WHERE idFactura=?";
-    $selectFactura = $conexionBD->prepare($sqlFactura);
-    $selectFactura->execute([$_REQUEST["idFactura"]]);
-    $rsFactura = $selectFactura->fetchAll();
+    $conexionBD = obtenerPdoConexionBD();
 
-    $_SESSION["facturaCoche"] = $rsFactura[0]["idCoche"];
-    $_SESSION["facturaMotor"] = $rsFactura[0]["idMotor"];
-    $_SESSION["facturaDisenio"] = $rsFactura[0]["idDisenio"];
-    $_SESSION["facturaGarantia"] = $rsFactura[0]["idGarantia"];
-    $_SESSION["facturaColor"] = $rsFactura[0]["idColor"];
+    //Si ha seleccionado uno de los coches del inicio, envia la id de la factura y ejecuta las consultas correspondientes
+    if(isset($_REQUEST["idFactura"])){
 
+        //Consulta SQL
+        $sqlFactura = "SELECT * FROM factura WHERE idFactura=?";
+        $selectFactura = $conexionBD->prepare($sqlFactura);
+        $selectFactura->execute([$_REQUEST["idFactura"]]);
+        $rsFactura = $selectFactura->fetchAll();
 
-    $_SESSION["cocheMarcado"] = true;
-    $_SESSION["disenioMarcado"] = true;
-    $_SESSION["motorMarcado"] = true;
-    $_SESSION["garantiaMarcado"] = true;
-    $todoMarcado = true;
-}
-
-if(isset($_REQUEST["borrar"])){
-            restablecerSeleccion();   
-        }
-
-if(isset($_REQUEST["garantia"])) { //Recoge datos de Garantía
-    $_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
-    $_SESSION["garantiaMarcado"] = true;
-}
-
-//Control de si están todos los campos seleccionados
-if(isset($_SESSION["facturaCoche"]) && isset($_SESSION["facturaDisenio"]) && isset($_SESSION["facturaMotor"]) && isset($_SESSION["facturaGarantia"])){
-    $todoMarcado = true;
-} else {
-    $todoMarcado = false;
-}
+        $_SESSION["facturaCoche"] = $rsFactura[0]["idCoche"];
+        $_SESSION["facturaMotor"] = $rsFactura[0]["idMotor"];
+        $_SESSION["facturaDisenio"] = $rsFactura[0]["idDisenio"];
+        $_SESSION["facturaGarantia"] = $rsFactura[0]["idGarantia"];
+        $_SESSION["facturaColor"] = $rsFactura[0]["idColor"];
 
 
+        $_SESSION["cocheMarcado"] = true;
+        $_SESSION["disenioMarcado"] = true;
+        $_SESSION["motorMarcado"] = true;
+        $_SESSION["garantiaMarcado"] = true;
+
+        $todoMarcado = true;
+    }
+
+    if(isset($_REQUEST["borrar"])){ //Si viene el parametro "borrar" enviado por "Borrar selección", vuelve al inicio y restablece las sesiones
+        restablecerSeleccion();
+    }
+
+    if(isset($_REQUEST["garantia"])) { //Recoge datos de Garantía
+        $_SESSION["facturaGarantia"] = $_REQUEST["garantia"];
+        $_SESSION["garantiaMarcado"] = true;
+    }
+
+    //Control de si están todos los campos seleccionados
+    if(isset($_SESSION["facturaCoche"]) && isset($_SESSION["facturaDisenio"]) && isset($_SESSION["facturaMotor"]) && isset($_SESSION["facturaGarantia"])){
+        $todoMarcado = true;
+    } else {
+        $todoMarcado = false;
+    }
 
 
-if($todoMarcado) { //Si están todos los apartados seleccionados
+    if($todoMarcado) { //Si están todos los apartados seleccionados
 
-//SQL de Coche
-    $sqlCoche = "SELECT * FROM coche WHERE idCoche=?";
-    $selectCoche = $conexionBD->prepare($sqlCoche);
-    $selectCoche->execute([$_SESSION["facturaCoche"]]);
-    $rsCoche = $selectCoche->fetchAll();
+        //SQL de Coche
+        $sqlCoche = "SELECT * FROM coche WHERE idCoche=?";
+        $selectCoche = $conexionBD->prepare($sqlCoche);
+        $selectCoche->execute([$_SESSION["facturaCoche"]]);
+        $rsCoche = $selectCoche->fetchAll();
 
-//SQL de Diseño
-    $sqlDisenio = "SELECT * FROM disenio WHERE idDisenio=?";
-    $selectDisenio = $conexionBD->prepare($sqlDisenio);
-    $selectDisenio->execute([$_SESSION["facturaDisenio"]]);
-    $rsDisenio = $selectDisenio->fetchAll();
-
-
-//SQL de Color
-    $sqlColor = "SELECT * FROM color WHERE idColor=?";
-    $selectColor = $conexionBD->prepare($sqlColor);
-    $selectColor->execute([$_SESSION["facturaColor"]]);
-    $rsColor = $selectColor->fetchAll();
-
-//SQL de Motor
-    $sqlMotor = "SELECT * FROM motor WHERE idMotor=?";
-    $selectMotor = $conexionBD->prepare($sqlMotor);
-    $selectMotor->execute([$_SESSION["facturaMotor"]]);
-    $rsMotor = $selectMotor->fetchAll();
-
-//SQL de Garantía
-    $sqlGarantia = "SELECT * FROM garantia WHERE idGarantia=?";
-    $selectGarantia = $conexionBD->prepare($sqlGarantia);
-    $selectGarantia->execute([$_SESSION["facturaGarantia"]]);
-    $rsGarantia = $selectGarantia->fetchAll();
+        //SQL de Diseño
+        $sqlDisenio = "SELECT * FROM disenio WHERE idDisenio=?";
+        $selectDisenio = $conexionBD->prepare($sqlDisenio);
+        $selectDisenio->execute([$_SESSION["facturaDisenio"]]);
+        $rsDisenio = $selectDisenio->fetchAll();
 
 
-    $precioFinal = 0;
+        //SQL de Color
+        $sqlColor = "SELECT * FROM color WHERE idColor=?";
+        $selectColor = $conexionBD->prepare($sqlColor);
+        $selectColor->execute([$_SESSION["facturaColor"]]);
+        $rsColor = $selectColor->fetchAll();
+
+        //SQL de Motor
+        $sqlMotor = "SELECT * FROM motor WHERE idMotor=?";
+        $selectMotor = $conexionBD->prepare($sqlMotor);
+        $selectMotor->execute([$_SESSION["facturaMotor"]]);
+        $rsMotor = $selectMotor->fetchAll();
+
+        //SQL de Garantía
+        $sqlGarantia = "SELECT * FROM garantia WHERE idGarantia=?";
+        $selectGarantia = $conexionBD->prepare($sqlGarantia);
+        $selectGarantia->execute([$_SESSION["facturaGarantia"]]);
+        $rsGarantia = $selectGarantia->fetchAll();
+
+
+        $precioFinal = 0;
 ?>
 
 
@@ -92,6 +97,7 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
     </head>
     <body>
     <h1>Factura</h1>
+
 
     <h2>Coche:</h2>
 
@@ -131,9 +137,9 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         <?php } ?>
 
 
-
     </table>
-        
+
+    <!-- Menú de navegación -->
     <div id="menu" style=" position:absolute; top: 30px; right:200px; padding:40px; border: 1px solid; background-color: #a9a9a9; border-radius:20px; ">
         <a href="Inicio.php">Inicio</a><br>
         <a href="CocheListado.php">Coches</a><?php if($_SESSION["cocheMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
@@ -142,8 +148,12 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         <a href="GarantiaListado.php">Garantias</a><?php if($_SESSION["garantiaMarcado"]){echo " <img src='imagenes/tick.png' width='15px' height='15px'>";} ?><br>
         <a href="FacturaListado.php">Factura</a><br>
     </div>
+
     <button  onclick="location.href='CocheListado.php?borrar'" style=" position:absolute; top: 190px; right:210px;">Borrar Selección</button>
+
+
     <h2>Diseño:</h2>
+
     <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
         <tr bgcolor='#a9a9a9' align='center'>
@@ -200,6 +210,7 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         <?php } ?>
     </table>
 
+
     <h2>Motor:</h2>
 
     <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
@@ -247,7 +258,9 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
 
     </table>
 
+
     <h2>Garantía:</h2>
+
     <table border='1' bgcolor='#d3d3d3' bordercolor='black'>
 
         <tr bgcolor='#a9a9a9' align='center'>
@@ -286,8 +299,8 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
     <?php $_SESSION["precioFinal"] = $precioFinal ?>
     <br />
 
-    <a href="GarantiaListado.php">Volver</a>
-    <a href="FacturaGuardar.php">Guardar</a>
+    <button onclick="location.href='GarantiaListado.php'">Volver</button>
+    <button onclick="location.href='FacturaGuardar.php'">Guardar</button>
 
     <?php }  else { //Si no ha seleccionado nada  ?>
 
@@ -313,10 +326,12 @@ if($todoMarcado) { //Si están todos los apartados seleccionados
         <div>
             <p> No has seleccionado una <a href="GarantiaListado.php">garantía</a>.</p>
         </div>
-    <?php  }?>
+    <?php  }
+    }
+    ?>
 
-<?php } ?>
-    </body>
-    </html>
+</body>
+
+</html>
 
 

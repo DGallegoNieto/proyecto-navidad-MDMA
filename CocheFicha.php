@@ -1,34 +1,37 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-if(!esAdmin()){
-    redireccionar("Inicio.php");
-}
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$pdo = obtenerPdoConexionBD();
+    $pdo = obtenerPdoConexionBD();
 
-$_SESSION["cocheId"] = (int)$_REQUEST["cocheId"];
+    $_SESSION["cocheId"] = (int)$_REQUEST["cocheId"];
 
-$nuevaEntrada = ($_SESSION["cocheId"] == -1);
 
-if($nuevaEntrada){
-    $marcaCoche = " ";
-    $modeloCoche = " ";
-    $tipoCoche = " ";
-    $precioCoche = " ";
-}else{
+    $nuevaEntrada = ($_SESSION["cocheId"] == -1);
 
-    $sql = "SELECT marca, modelo, tipo, precio FROM coche WHERE idCoche=?";
-    $select = $pdo->prepare($sql);
-    $select->execute([$_SESSION["cocheId"]]);
-    $rs = $select->fetchAll();
+    if($nuevaEntrada){
 
-    $marcaCoche = $rs[0]["marca"];
-    $modeloCoche = $rs[0]["modelo"];
-    $tipoCoche = $rs[0]["tipo"];
-    $precioCoche = $rs[0]["precio"];
-}
+        $marcaCoche = " ";
+        $modeloCoche = " ";
+        $tipoCoche = " ";
+        $precioCoche = " ";
+
+    } else{
+
+        $sql = "SELECT marca, modelo, tipo, precio FROM coche WHERE idCoche=?";
+        $select = $pdo->prepare($sql);
+        $select->execute([$_SESSION["cocheId"]]);
+        $rs = $select->fetchAll();
+
+        $marcaCoche = $rs[0]["marca"];
+        $modeloCoche = $rs[0]["modelo"];
+        $tipoCoche = $rs[0]["tipo"];
+        $precioCoche = $rs[0]["precio"];
+    }
 
 ?>
 <html>
@@ -71,8 +74,12 @@ if($nuevaEntrada){
         <input type="submit" value="Guardar cambios" name="guardar">
     <?php } ?>
 </form>
+
 <button onclick="location.href='CocheListado.php'">Volver</button>
-<br /><br />
+
+<br />
+<br />
+
 <a href="CocheEliminar.php?id=<?=$_SESSION["cocheId"]?>">Eliminar</a>
 
 </html>

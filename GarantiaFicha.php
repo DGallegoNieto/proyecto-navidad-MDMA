@@ -1,32 +1,32 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-if(!esAdmin()){
-    redireccionar("Inicio.php");
-}
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$pdo = obtenerPdoConexionBD();
+    $pdo = obtenerPdoConexionBD();
 
-$_SESSION["garantiaId"] = (int)$_REQUEST["garantiaId"];
+    $_SESSION["garantiaId"] = (int)$_REQUEST["garantiaId"];
 
-$nuevaEntrada = ($_SESSION["garantiaId"] == -1);
+    $nuevaEntrada = ($_SESSION["garantiaId"] == -1);
 
-if($nuevaEntrada){
-    $aniosGarantia = " ";
-    $kilometrajeGarantia = " ";
-    $precioGarantia = " ";
-}else{
+    if($nuevaEntrada){
+        $aniosGarantia = " ";
+        $kilometrajeGarantia = " ";
+        $precioGarantia = " ";
+    }else{
 
-    $sql = "SELECT anios, kilometraje, precio FROM garantia WHERE idGarantia=?";
-    $select = $pdo->prepare($sql);
-    $select->execute([$_SESSION["garantiaId"]]);
-    $rs = $select->fetchAll();
+        $sql = "SELECT anios, kilometraje, precio FROM garantia WHERE idGarantia=?";
+        $select = $pdo->prepare($sql);
+        $select->execute([$_SESSION["garantiaId"]]);
+        $rs = $select->fetchAll();
 
-    $aniosGarantia = $rs[0]["anios"];
-    $kilometrajeGarantia = $rs[0]["kilometraje"];
-    $precioGarantia = $rs[0]["precio"];
-}
+        $aniosGarantia = $rs[0]["anios"];
+        $kilometrajeGarantia = $rs[0]["kilometraje"];
+        $precioGarantia = $rs[0]["precio"];
+    }
 
 ?>
 <html>

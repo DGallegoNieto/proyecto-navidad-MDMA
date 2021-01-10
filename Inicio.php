@@ -1,15 +1,10 @@
 <?php
-//enlace Inicio sesion - Registro
-//Mostrar coches por defecto
-//enlace Novedades/Mas vendidos
-//enlace Informacion coche
-//enlace Crear coche
-
-//Admins
-//ver facturas
-//editar coche, motor, garantia, disenio...
 
 require_once "_varios.php";
+
+if(hayCookieValida()) { //Canjea cookie si ha marcado el checkbox de recuerdame y accede directamente a Inicio
+    $cookieCanjeada = intentarCanjearSesionCookie();
+}
 
 ?>
 <html>
@@ -24,7 +19,7 @@ require_once "_varios.php";
 
 <?php mostrarInfoUsuario(); ?>
 
-<?php if(haySesionIniciada()){ ?>
+<?php if(haySesionIniciada()){ //Da opción a crear coches personalizados y comprar una vez se haya iniciado sesión?>
 
 <H3>CREA TU PROPIO COCHE PERSONALIZADO <a href="CocheListado.php" >AQUÍ</a></H3>
 

@@ -1,41 +1,46 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-$pdo = obtenerPdoConexionBD();
+    if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+        redireccionar("Inicio.php");
+    }
 
-$acabadoDisenio = $_REQUEST["acabado"];
-$llantasDisenio = $_REQUEST["llantas"];
-$asientosDisenio = $_REQUEST["asientos"];
-$parrillaDisenio = $_REQUEST["parrilla"];
-$precioDisenio = $_REQUEST["precio"];
+    $pdo = obtenerPdoConexionBD();
 
-
-
-$nueva_entrada = ($_SESSION["disenioId"] == -1);
-
-if ($nueva_entrada) {
-
-    $sql = "INSERT INTO disenio (acabado, llantas, asientos, parrilla, precio) VALUES (?, ?, ?, ?, ?)";
-    $parametros = [$acabadoDisenio, $llantasDisenio, $asientosDisenio, $parrillaDisenio, $precioDisenio];
-
-} else {
-
-    $sql = "UPDATE disenio SET acabado=?, llantas=?, asientos=?, parrilla=?, precio=? WHERE idCoche=?";
-    $parametros = [$acabadoDisenio, $llantasDisenio, $asientosDisenio, $parrillaDisenio, $precioDisenio, $_SESSION["disenioId"]];
-}
-
-$sentencia = $pdo->prepare($sql);
-$sql_con_exito = $sentencia->execute($parametros);
+    $acabadoDisenio = $_REQUEST["acabado"];
+    $llantasDisenio = $_REQUEST["llantas"];
+    $asientosDisenio = $_REQUEST["asientos"];
+    $parrillaDisenio = $_REQUEST["parrilla"];
+    $precioDisenio = $_REQUEST["precio"];
 
 
-$una_fila_afectada = ($sentencia->rowCount() == 1);
-$ninguna_fila_afectada = ($sentencia->rowCount() == 0);
+
+    $nueva_entrada = ($_SESSION["disenioId"] == -1);
+
+    if ($nueva_entrada) {
+
+        $sql = "INSERT INTO disenio (acabado, llantas, asientos, parrilla, precio) VALUES (?, ?, ?, ?, ?)";
+        $parametros = [$acabadoDisenio, $llantasDisenio, $asientosDisenio, $parrillaDisenio, $precioDisenio];
+
+    } else {
+
+        $sql = "UPDATE disenio SET acabado=?, llantas=?, asientos=?, parrilla=?, precio=? WHERE idCoche=?";
+        $parametros = [$acabadoDisenio, $llantasDisenio, $asientosDisenio, $parrillaDisenio, $precioDisenio, $_SESSION["disenioId"]];
+    }
+
+    $sentencia = $pdo->prepare($sql);
+    $sql_con_exito = $sentencia->execute($parametros);
 
 
-$correcto = ($sql_con_exito && $una_fila_afectada);
+    $una_fila_afectada = ($sentencia->rowCount() == 1);
+    $ninguna_fila_afectada = ($sentencia->rowCount() == 0);
 
-$datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
+
+    $correcto = ($sql_con_exito && $una_fila_afectada);
+
+    $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
+
 ?>
 
 

@@ -1,32 +1,24 @@
 <?php
 
-require_once "_varios.php";
+    require_once "_varios.php";
 
-if(!haySesionIniciada()){
-        redireccionar("Inicio.php");
+    if(!haySesionIniciada()){ //Si no hay sesión iniciada, redirige al inicio
+            redireccionar("Inicio.php");
     }
-    
-$pdo = obtenerPdoConexionBD();
+
+    $pdo = obtenerPdoConexionBD();
+
+    //Consulta SQL
+    $sql = "INSERT INTO factura (idUsuario, idCoche, idMotor, idDisenio, idGarantia, idColor, fecha, precioFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $parametros = [$_SESSION["idUsuario"], $_SESSION["facturaCoche"], $_SESSION["facturaMotor"], $_SESSION["facturaDisenio"], $_SESSION["facturaGarantia"], $_SESSION["facturaColor"], date("Y-m-d"), $_SESSION["precioFinal"]];
+    $sentencia = $pdo->prepare($sql);
+    $sql_con_exito = $sentencia->execute($parametros);
 
 
+    $una_fila_afectada = ($sentencia->rowCount() == 1); //Si ha habido exito, deberá devolver una unica fila afectada
 
+    $correcto = ($sql_con_exito && $una_fila_afectada);
 
-$sql = "INSERT INTO factura (idUsuario, idCoche, idMotor, idDisenio, idGarantia, idColor, fecha, precioFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-$parametros = [$_SESSION["idUsuario"], $_SESSION["facturaCoche"], $_SESSION["facturaMotor"], $_SESSION["facturaDisenio"], $_SESSION["facturaGarantia"], $_SESSION["facturaColor"], date("Y-m-d"), $_SESSION["precioFinal"]];
-
-
-
-$sentencia = $pdo->prepare($sql);
-$sql_con_exito = $sentencia->execute($parametros);
-
-
-$una_fila_afectada = ($sentencia->rowCount() == 1);
-$ninguna_fila_afectada = ($sentencia->rowCount() == 0);
-
-
-$correcto = ($sql_con_exito && $una_fila_afectada);
-
-$datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
 ?>
 
 
@@ -42,11 +34,12 @@ $datos_no_modificados = ($sql_con_exito && $ninguna_fila_afectada);
 <body>
 
 <?php
+    if ($correcto) {
+        restablecerSeleccion(); ?>
 
-if ($correcto || $datos_no_modificados) { ?>
+        <h1>Guardado completado</h1>
+        <p>Se ha guardado completamente la factura.</p>
 
-    <h1>Guardado completado</h1>
-    <p>Se ha guardado completamente la factura.</p>
 
 <?php } else {?>
 

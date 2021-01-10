@@ -1,5 +1,6 @@
 <?php
-require_once"_Varios.php";
+
+    require_once"_Varios.php";
 ?>
 
 <html>
@@ -36,45 +37,37 @@ require_once"_Varios.php";
 </html>
 
 <?php
-	
-//*TODO poner un minimo de longitud en todos los campos*
-if(isset($_GET["errorC"])){
-	echo "Las contraseñas no coinciden.";
-}
-if(isset($_GET["errorU"])){
-	echo "El usuario que quieres usar ya esta siendo utilizado";
-}
-if (isset($_REQUEST["contrasenia"])&& isset($_REQUEST["usuario"])&& isset($_REQUEST["nombre"]) && isset($_REQUEST["apellido"])) {
-
-	$contrasenia = trim($_REQUEST["contrasenia"]);
-	$contraseniaC = trim($_REQUEST["contraseniaC"]);
-	$usuario = trim($_REQUEST["usuario"]);
-	$nombre = trim($_REQUEST["nombre"]);
-	$apellido = trim($_REQUEST["apellido"]);
-
-	
-	if(comprobarUsuario($usuario)){
-		redireccionar("UsuarioCrear.php?errorU");
-
-}
-
-	if($contrasenia != $contraseniaC || $contrasenia==" " || $contraseniaC==""){
-		
-		redireccionar("UsuarioCrear.php?errorC");
-}
-
-	
-	//metodo que crea el usuario
-	
-	crearUsuario($usuario,$contrasenia,$nombre,$apellido);
-
-	redireccionar("SesionInicioMostrarFormulario.php");
-}
 
 
+    if(isset($_GET["errorC"])) { //Si viene error de Contraseña
+        echo "Las contraseñas no coinciden.";
+    }
+
+    if(isset($_GET["errorU"])) { //Si viene error de Usuario
+        echo "El usuario que quieres usar ya esta siendo utilizado";
+    }
+
+    if (isset($_REQUEST["contrasenia"]) && isset($_REQUEST["usuario"]) && isset($_REQUEST["nombre"]) && isset($_REQUEST["apellido"])) {
+
+        $contrasenia = trim($_REQUEST["contrasenia"]);
+        $contraseniaC = trim($_REQUEST["contraseniaC"]);
+        $usuario = trim($_REQUEST["usuario"]);
+        $nombre = trim($_REQUEST["nombre"]);
+        $apellido = trim($_REQUEST["apellido"]);
 
 
+        if(comprobarUsuario($usuario)){
+            redireccionar("UsuarioCrear.php?errorU");
+        }
 
+        if($contrasenia != $contraseniaC || $contrasenia==" " || $contraseniaC==""){
+            redireccionar("UsuarioCrear.php?errorC");
+        }
 
+        //Método que crea el usuario
+        crearUsuario($usuario,$contrasenia,$nombre,$apellido);
+
+        redireccionar("SesionInicioMostrarFormulario.php");
+    }
 
 ?>

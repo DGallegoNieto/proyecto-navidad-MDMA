@@ -1,11 +1,13 @@
 <?php
+
 	require_once "_varios.php";
 
-	if(!esAdmin()){
-	redireccionar("Inicio.php");
+	if(!esAdmin()){ //Si por algun motivo el usuario que accede no es un admin, redirecciona al Inicio
+	    redireccionar("Inicio.php");
 	}
 	
 	$conexionBD = obtenerPdoConexionBD();
+
 	$idMotor = (int)$_REQUEST["idMotor"];
 	$potencia = $_REQUEST["potencia"];
     $combustible = $_REQUEST["combustible"];
