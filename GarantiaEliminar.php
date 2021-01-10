@@ -1,6 +1,10 @@
 <?php
 require_once "_varios.php";
 
+if(!esAdmin()){
+	redireccionar("Inicio.php");
+}
+
 $conexion = obtenerPdoConexionBD();
 
 $sql = "DELETE FROM garantia WHERE idGarantia=?";

@@ -1,6 +1,10 @@
 <?php
 	require_once "_varios.php";
 
+	if(!esAdmin()){
+	redireccionar("Inicio.php");
+}
+
 	$conexionBD = obtenerPdoConexionBD();
 	$idMotor = (int)$_REQUEST["idMotor"];
     $sql = "DELETE FROM motor WHERE idMotor=?";

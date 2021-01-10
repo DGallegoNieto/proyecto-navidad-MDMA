@@ -4,6 +4,9 @@
 //Admins puedan editar (añadir/eliminar) motores
 
 	require_once "_varios.php";
+	if(!isset($_SESSION["idUsuario"])){
+		redireccionar("Inicio.php");
+	}
 
 	$conexionBD = obtenerPdoConexionBD();
 	$sql = "SELECT idMotor, potencia, combustible, cilindrada, consumo, co2, cajaCambio, precio FROM motor ORDER BY potencia";
@@ -106,7 +109,7 @@
 
 <br />
 <br/>
-<input type="submit" value="Siguiente">
+<input type="submit" value="Guardar y continuar">
 <br />
 
 </form>

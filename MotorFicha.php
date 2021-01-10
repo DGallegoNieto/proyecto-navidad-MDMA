@@ -1,6 +1,10 @@
 <?php
 	require_once "_varios.php";
 
+    if(!esAdmin()){
+    redireccionar("Inicio.php");
+    }
+
 	$conexion = obtenerPdoConexionBD();
 	$idMotor = (int)$_REQUEST["idMotor"];
 	$nuevaEntrada = ($idMotor == -1);

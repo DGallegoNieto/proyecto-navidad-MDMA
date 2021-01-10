@@ -3,6 +3,10 @@ require_once "_varios.php";
 
 $conexion = obtenerPdoConexionBD();
 
+if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+    }
+    
 
 $sql = "DELETE FROM usuario WHERE idUsuario=?";
 

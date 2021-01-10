@@ -2,6 +2,10 @@
 
 require_once "_varios.php";
 
+if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+    }
+    
 $pdo = obtenerPdoConexionBD();
 
 

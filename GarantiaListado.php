@@ -1,6 +1,10 @@
 <?php
 require_once "_varios.php";
 
+ if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+    }
+    
 $pdo = obtenerPdoConexionBD();
 
 $sql = "SELECT * FROM garantia ORDER BY idGarantia";

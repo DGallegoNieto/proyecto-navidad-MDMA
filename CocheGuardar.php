@@ -2,6 +2,10 @@
 
 require_once "_varios.php";
 
+if(!esAdmin()){
+    redireccionar("Inicio.php");
+}
+
 $pdo = obtenerPdoConexionBD();
 
 //$_SESSION["cocheId"]

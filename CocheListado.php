@@ -1,6 +1,10 @@
 <?php
 require_once "_varios.php";
 
+ if(!haySesionIniciada()){
+        redireccionar("Inicio.php");
+    }
+
 if(isset($_SESSION["cocheMarcado"])){
     
 }
