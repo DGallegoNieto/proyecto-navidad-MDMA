@@ -17,13 +17,13 @@ Alejandro se encargaría de la parte de creación de nuevos usuario y el logueo 
 
 Al final del trabajo cada uno ha hecho lo siguiente:
 
-Marti se ha encargado de hacer la parte del motor y el menú que se ve al elegir las partes del coche.
+Marti se ha encargado de hacer la parte del motor y el menú que se ve al elegir las partes del coche y a corregir errores.
 
 Mario se ha encargado de hacer el inicio y todo lo relacionado con garantía.
 
 David se ha encargado de todo lo relacionado con coche , con diseño, factura, de aportar soporte a todos los integrantes del grupo cuando lo han necesitado y a corregir errores.
 
-Alejandro se ha dedicado a hacer todo lo relacionado con los usuarios y a corregir errores.
+Alejandro se ha dedicado a hacer todo lo relacionado con los usuarios.
 
 Hemos trabajado alrededor de 23 horas aproximadamente en el proyecto cada uno aportando lo que podía en relación a sus conocimientos.
 
